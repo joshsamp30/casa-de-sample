@@ -1817,13 +1817,33 @@
       const step = 100 / total;
 
       function goTo(n) {
+        // Pause all videos first
+        slides.forEach(s => {
+          const v = s.querySelector('video');
+          if (v) { v.pause(); v.currentTime = 0; }
+        });
+        clearInterval(timer);
+
         cur = (n + total) % total;
         track.style.transform = `translateX(-${cur * step}%)`;
         dots.forEach((d, i) => d.classList.toggle('active', i === cur));
+
+        // If current slide has a video, play it and advance when it ends
+        const activeVid = slides[cur].querySelector('video');
+        if (activeVid) {
+          activeVid.play().catch(() => {});
+          activeVid.addEventListener('ended', function onEnd() {
+            activeVid.removeEventListener('ended', onEnd);
+            goTo(cur + 1);
+          }, { once: true });
+        } else {
+          // Photo slide — resume normal auto-advance
+          startAuto();
+        }
       }
 
       function next() { goTo(cur + 1); }
-      function startAuto() { timer = setInterval(next, 4500); }
+      function startAuto() { timer = setInterval(next, 5000); }
       function resetAuto() { clearInterval(timer); startAuto(); }
 
       const prevBtn = car.querySelector('.ch-prev');
