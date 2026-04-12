@@ -262,6 +262,95 @@
       letter-spacing: .38em; text-transform: uppercase; color: rgba(201,169,110,.7);
     }
 
+
+    /* ─── TREASURE NARRATIVE ─────────────────────────────────── */
+    .treasure-story {
+      padding: 48px 80px 80px;
+    }
+    .treasure-intro {
+      max-width: 760px; margin: 0 auto 72px; text-align: center;
+    }
+    .treasure-intro p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(20px, 2.4vw, 30px); font-style: italic; font-weight: 300;
+      line-height: 1.75; color: #1a1a1a;
+    }
+    .treasure-act {
+      margin-bottom: 72px;
+    }
+    .treasure-act-label {
+      font-family: 'Montserrat', sans-serif; font-size: 8px; font-weight: 300;
+      letter-spacing: .5em; text-transform: uppercase; color: #c9a96e;
+      margin-bottom: 20px; display: block;
+    }
+    .t-copy {
+      font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300;
+      line-height: 1.9; color: #2a2a2a; margin-bottom: 24px;
+    }
+    /* Two images side by side */
+    .t-pair {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-bottom: 32px;
+    }
+    .t-pair-3 {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; margin-bottom: 32px;
+    }
+    /* Image box */
+    .t-img {
+      position: relative; overflow: hidden;
+      cursor: zoom-in; background: #e0d9cf;
+      transition: transform .4s ease, box-shadow .4s ease;
+    }
+    .t-img:hover { transform: scale(1.012); box-shadow: 0 14px 48px rgba(0,0,0,.2); z-index: 2; }
+    .t-img img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; display: block; transition: transform .6s ease;
+    }
+    .t-img:hover img { transform: scale(1.04); }
+    .t-img.portrait  { aspect-ratio: 2/3; }
+    .t-img.landscape { aspect-ratio: 3/2; }
+    .t-img.wide      { aspect-ratio: 16/9; }
+    .t-img.square    { aspect-ratio: 1; }
+    /* Text + image band */
+    .t-side {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: start; margin-bottom: 72px;
+    }
+    .t-side.flip .t-text { order: 2; }
+    .t-side.flip .t-media { order: 1; }
+    .t-text { }
+    .t-media { display: flex; flex-direction: column; gap: 4px; }
+    /* Chest heading */
+    .chest-num {
+      font-family: 'Montserrat', sans-serif; font-size: 8.5px; font-weight: 300;
+      letter-spacing: .5em; text-transform: uppercase; color: #c9a96e;
+      margin-bottom: 8px; display: block;
+    }
+    .chest-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(32px, 3.5vw, 52px); letter-spacing: .05em;
+      color: #1a1a1a; line-height: 1; margin-bottom: 24px;
+    }
+    /* Fake-out quote */
+    .treasure-fakeout {
+      border-top: 1px solid rgba(201,169,110,.35);
+      padding-top: 60px; margin-top: 72px; text-align: center;
+    }
+    .treasure-fakeout .fakeout-copy {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(20px, 2.6vw, 32px); font-style: italic; font-weight: 300;
+      color: #1a1a1a; line-height: 1.65; max-width: 720px;
+      margin: 0 auto 20px;
+    }
+    .treasure-fakeout .fakeout-kicker {
+      font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 300;
+      letter-spacing: .45em; text-transform: uppercase; color: #c9a96e;
+    }
+    /* Reckoning 4-up grid */
+    .t-reckoning {
+      display: grid; grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto; gap: 4px; margin-bottom: 48px;
+    }
+
     /* ─── SECTION DIVIDER ────────────────────────────────────── */
     .section-divider {
       height: 1px;
@@ -573,6 +662,11 @@
       .chronicle-body.flip .chronicle-text { order: 1; }
       .chronicle-body.flip .chronicle-media { order: 2; }
       .ch-carousel { aspect-ratio: 4/3; }
+      .treasure-story { padding: 32px 28px 56px; }
+      .t-side, .t-side.flip { grid-template-columns: 1fr; gap: 24px; }
+      .t-side.flip .t-text { order: 1; }
+      .t-side.flip .t-media { order: 2; }
+      .t-reckoning { grid-template-columns: 1fr 1fr; }
       .video-pair { grid-template-columns: 1fr 1fr; }
       .section-divider { margin: 0 32px; }
       .arrival-band { grid-template-columns: 1fr; padding: 0 28px 60px; }
@@ -1295,103 +1389,251 @@
         <p class="chapter-sub">A morning in Nashville. An idea that wouldn't leave. Three chests buried in Santorini. Metal detectors waiting.</p>
       </div>
     </div>
-    <div class="chronicle-body reveal">
-      <div class="chronicle-text">
-        <p class="story-copy">
-          This idea started in Nashville.
-        </p>
-        <p class="story-copy">
-          A few months before the trip, Josh and Nick and Danielle were sitting on a porch —
-          hungover, the morning slow, the city still going somewhere below them.
-          Across the way, a group of older men were out with metal detectors,
-          working a patch of ground like they had all the time in the world.
-          Methodical. Unhurried. Finding things. That image stayed with Josh
-          long after the weekend ended.
-        </p>
-        <p class="story-copy">
-          He wanted to give Danielle a proposal day with real chapters.
-          Not a single gesture. A production. Each hour built like a scene.
-          The metal detectors were her chapter. A treasure hunt — built like the real thing.
-        </p>
-        <p class="story-copy">
-          Three chests. Hidden in the volcanic terrain. Metal detectors waiting on arrival.
-          She had to find them. That was the game.
-          The stakes were much higher than she knew.
-        </p>
-        <p class="story-copy">
-          The first chest held the past. A Wynn casino chip — and a piece of bread.
-          Their first date was at Jardin in Las Vegas. Early morning. Danielle watched what she ate
-          that day because the pools were coming. Josh left before it got late.
-          He never forgot that morning. The chip was from the Wynn. The bread was the whole story.
-          Neither of them needed a caption. She knew exactly what it meant.
-        </p>
-        <p class="story-copy">
-          The second chest held the present. A Cartier pearl necklace.
-          Chosen for the woman she had become.
-          The third chest looked forward. A custom artwork: Josh and Danielle,
-          Greece in the background. Because this island would always belong to them.
-        </p>
-        <p class="story-copy">
-          By the time the third chest opened, she was certain the moment had arrived.
-          The day had more. That restraint is what made the ending matter.
-        </p>
-        <ul class="story-detail">
-          <li>Inspired by a Nashville morning · Josh, Nick, and Danielle watching old men with metal detectors from the porch</li>
-          <li>Metal detectors waiting · three chests buried in the volcanic terrain</li>
-          <li>Chest 01 · The Past: Wynn casino chip + a piece of bread · first date at Jardin, Las Vegas</li>
-          <li>Chest 02 · The Present: Cartier pearl necklace</li>
-          <li>Chest 03 · The Future: Custom bespoke artwork · Josh &amp; Danielle · Santorini</li>
-          <li>The beautiful fake-out — she was certain. The day had more.</li>
-        </ul>
+    <div class="treasure-story reveal">
+
+      <!-- ── Opening pull quote ── -->
+      <div class="treasure-intro">
+        <p>It started with a note left on the beach.<br>
+        Then a metal detector appeared in her hands.<br>
+        What followed was twenty minutes of confusion,<br>
+        two encounters with trash, and three buried chests<br>
+        — followed by the greatest fake-out of the entire day.</p>
       </div>
-      <div class="chronicle-media">
-        <div class="ch-carousel" id="ch05Carousel">
-          <div class="ch-carousel-track">
-            <div class="ch-slide">
-              <img src="proposal%20photos/JoshandNicole-81.jpg" alt="Danielle smiling · metal detector in hand · Santorini" loading="lazy">
-            </div>
-            <div class="ch-slide">
-              <img src="proposal%20photos/JoshandNicole-83.jpg" alt="Danielle laughing · holding a find · metal detector · Santorini" loading="lazy">
-            </div>
-            <div class="ch-slide">
-              <img src="proposal%20photos/JoshandNicole-91.jpg" alt="Josh watching from the foreground as Danielle hunts · wide shot" loading="lazy">
-            </div>
-            <div class="ch-slide">
-              <img src="proposal%20photos/JoshandNicole-88.jpg" alt="Josh and Danielle together examining a find · volcanic terrain" loading="lazy">
-            </div>
-            <div class="ch-slide">
-              <img src="proposal%20photos/JoshandNicole-85.jpg" alt="Danielle with the metal detector · finding the chest · Santorini" loading="lazy">
-            </div>
-            <div class="ch-slide">
-              <img src="proposal%20photos/JoshandNicole-98.jpg" alt="Danielle's hands holding the treasure chest · the reveal" loading="lazy">
-            </div>
-            <div class="ch-slide">
-              <img src="proposal%20photos/JoshandNicole-100.jpg" alt="Treasure chest contents · Cartier necklace · Santorini artwork" loading="lazy">
-            </div>
-            <div class="ch-slide">
-              <img src="proposal%20photos/JoshandNicole-95.jpg" alt="Josh and Danielle in the volcanic crevice · Santorini" loading="lazy">
-            </div>
-            <div class="ch-slide" style="background:#000;">
-              <video controls playsinline style="width:100%;height:100%;object-fit:cover;">
-                <source src="dector%20hunt.MOV" type="video/mp4" />
-              </video>
-            </div>
+
+      <!-- ── ACT 1: THE NOTE ── -->
+      <div class="treasure-act">
+        <span class="treasure-act-label">The Note</span>
+        <div class="t-pair">
+          <div class="t-img landscape" data-src="proposal%20photos/Treasure%20Hunt/JoshandNicole-76.jpg">
+            <img src="proposal%20photos/Treasure%20Hunt/JoshandNicole-76.jpg" alt="Danielle unwrapping the first note · the hunt begins · Santorini" loading="lazy">
           </div>
-          <div class="ch-carousel-dots">
-            <span class="ch-dot active" data-idx="0"></span>
-            <span class="ch-dot" data-idx="1"></span>
-            <span class="ch-dot" data-idx="2"></span>
-            <span class="ch-dot" data-idx="3"></span>
-            <span class="ch-dot" data-idx="4"></span>
-            <span class="ch-dot" data-idx="5"></span>
-            <span class="ch-dot" data-idx="6"></span>
-            <span class="ch-dot" data-idx="7"></span>
-            <span class="ch-dot" data-idx="8"></span>
+          <div class="t-img landscape" data-src="proposal%20photos/Treasure%20Hunt/JoshandNicole-77.jpg">
+            <img src="proposal%20photos/Treasure%20Hunt/JoshandNicole-77.jpg" alt="The note itself · instructions for the treasure hunt · Monolithos beach" loading="lazy">
           </div>
-          <button class="ch-arrow ch-prev">&#8592;</button>
-          <button class="ch-arrow ch-next">&#8594;</button>
+        </div>
+        <p class="t-copy">
+          After the horses came back down the beach, the driver pulled over.
+          A sealed envelope was waiting. Not at a restaurant, not at the hotel —
+          on a stretch of open volcanic terrain, nothing around them but black sand and sky.
+        </p>
+        <p class="t-copy">
+          She opened it. Inside: instructions. A metal detector was placed in her hands.
+          She looked at Josh. He looked back. This was happening.
+        </p>
+      </div>
+
+      <!-- ── ACT 2: ARMED ── -->
+      <div class="t-side">
+        <div class="t-text">
+          <span class="treasure-act-label">Armed &amp; Hunting</span>
+          <p class="t-copy">
+            She swept the volcanic terrain in the Prada outfit from the morning.
+            The detector swept left and right. The ground gave nothing away.
+            The photographer was somewhere close — still invisible, still capturing everything.
+          </p>
+          <p class="t-copy">
+            The Aegean was behind her. Somewhere beneath the surface,
+            three boxes were buried. She had no idea what she was looking for yet.
+            She just knew she was looking.
+          </p>
+        </div>
+        <div class="t-media">
+          <div class="t-img portrait" data-src="proposal%20photos/Treasure%20Hunt/JoshandNicole-79.jpg">
+            <img src="proposal%20photos/Treasure%20Hunt/JoshandNicole-79.jpg" alt="Danielle starting the treasure hunt · metal detector · Monolithos beach" loading="lazy">
+          </div>
         </div>
       </div>
+
+      <!-- ── ACT 3: THE FAKE-OUTS ── -->
+      <div class="t-side flip">
+        <div class="t-media">
+          <div class="t-pair" style="margin-bottom:0;">
+            <div class="t-img portrait" data-src="proposal%20photos/Treasure%20Hunt/JoshandNicole-83.jpg">
+              <img src="proposal%20photos/Treasure%20Hunt/JoshandNicole-83.jpg" alt="Danielle finds something — it's trash · first false start · Santorini" loading="lazy">
+            </div>
+            <div class="t-img portrait" data-src="proposal%20photos/Treasure%20Hunt/JoshandNicole-81.jpg">
+              <img src="proposal%20photos/Treasure%20Hunt/JoshandNicole-81.jpg" alt="Danielle getting frustrated · second false start · the hunt · Santorini" loading="lazy">
+            </div>
+          </div>
+        </div>
+        <div class="t-text">
+          <span class="treasure-act-label">The False Starts</span>
+          <p class="t-copy">
+            The first hit came fast. The detector went off. She got down,
+            reached into the volcanic ground — and came up with trash.
+          </p>
+          <p class="t-copy">
+            She tried again. Hit number two: more trash.
+          </p>
+          <p class="t-copy">
+            She stood up. She looked at Josh.
+            She was not remotely amused.
+          </p>
+          <p class="t-copy">
+            The volcanic ground of Santorini, it turns out,
+            is full of things that are not treasure chests.
+          </p>
+        </div>
+      </div>
+
+      <!-- ── ACT 4a: CHEST 1 ── -->
+      <div class="t-side">
+        <div class="t-text">
+          <span class="chest-num">Chest One</span>
+          <h3 class="chest-label">The Past</h3>
+          <p class="t-copy">
+            Then the detector screamed. She could feel it was different this time.
+            She dug. The box was real.
+          </p>
+          <p class="t-copy">
+            Inside: a Wynn casino chip. And a piece of bread.
+          </p>
+          <p class="t-copy">
+            Their first date was at Jardin in Las Vegas. Early morning.
+            She was watching what she ate — the pools were coming.
+            Josh left before it got late.
+            He had remembered every detail of that morning since the day it happened.
+            The chip was from the Wynn. The bread was the order she wouldn't finish.
+          </p>
+          <p class="t-copy">
+            Neither of them needed a caption.
+            She knew exactly what it meant.
+          </p>
+        </div>
+        <div class="t-media">
+          <div class="t-img landscape" data-src="proposal%20photos/Treasure%20Hunt/JoshandNicole-85.jpg">
+            <img src="proposal%20photos/Treasure%20Hunt/JoshandNicole-85.jpg" alt="Danielle finds the first chest · the Wynn box · Santorini" loading="lazy">
+          </div>
+          <div class="t-img portrait" data-src="proposal%20photos/Treasure%20Hunt/JoshandNicole-86.jpg">
+            <img src="proposal%20photos/Treasure%20Hunt/JoshandNicole-86.jpg" alt="Inside Chest One · the Wynn chip and the piece of bread · their first date" loading="lazy">
+          </div>
+        </div>
+      </div>
+
+      <!-- ── ACT 4b: BACK ON THE HUNT ── -->
+      <div class="treasure-act" style="max-width: 440px; margin-left: auto; margin-right: auto; margin-bottom: 72px;">
+        <div class="t-img portrait" data-src="proposal%20photos/Treasure%20Hunt/JoshandNicole-87.jpg">
+          <img src="proposal%20photos/Treasure%20Hunt/JoshandNicole-87.jpg" alt="Back on the hunt · metal detector · Monolithos · the search continues" loading="lazy">
+        </div>
+        <p class="t-copy" style="text-align:center; margin-top: 24px; font-style:italic;">
+          She kept going.
+        </p>
+      </div>
+
+      <!-- ── ACT 4c: CHEST 2 ── -->
+      <div class="t-side flip">
+        <div class="t-media">
+          <div class="t-img portrait" data-src="proposal%20photos/Treasure%20Hunt/JoshandNicole-89.jpg">
+            <img src="proposal%20photos/Treasure%20Hunt/JoshandNicole-89.jpg" alt="Danielle uncovers Chest Two · the present · Monolithos beach" loading="lazy">
+          </div>
+          <div class="t-img landscape" data-src="proposal%20photos/Treasure%20Hunt/JoshandNicole-90.jpg">
+            <img src="proposal%20photos/Treasure%20Hunt/JoshandNicole-90.jpg" alt="Chest Two open · the Cartier pearl necklace revealed" loading="lazy">
+          </div>
+        </div>
+        <div class="t-text">
+          <span class="chest-num">Chest Two</span>
+          <h3 class="chest-label">The Present</h3>
+          <p class="t-copy">
+            The second chest held a Cartier pearl necklace.
+          </p>
+          <p class="t-copy">
+            Not a placeholder. Not a symbol.
+            The real thing — chosen for who she had become
+            in the years since Las Vegas.
+          </p>
+          <p class="t-copy">
+            She didn't know there was a third box yet.
+          </p>
+        </div>
+      </div>
+
+      <!-- ── ACT 4d: WIDE HUNT SHOT ── -->
+      <div class="treasure-act">
+        <div class="t-img wide" data-src="proposal%20photos/Treasure%20Hunt/JoshandNicole-91.jpg">
+          <img src="proposal%20photos/Treasure%20Hunt/JoshandNicole-91.jpg" alt="The search continues · wide shot · Monolithos volcanic terrain · Santorini" loading="lazy">
+        </div>
+      </div>
+
+      <!-- ── ACT 4e: CHEST 3 ── -->
+      <div class="t-side">
+        <div class="t-text">
+          <span class="chest-num">Chest Three</span>
+          <h3 class="chest-label">The Future</h3>
+          <p class="t-copy">
+            The third chest came up from the volcanic ground like it had been
+            waiting there for years.
+          </p>
+          <p class="t-copy">
+            Inside: a custom painting. Josh and Danielle.
+            Greece behind them. Not a photograph —
+            a piece of artwork made for them, of them, on this island.
+          </p>
+          <p class="t-copy">
+            Because this island would always belong to them.
+          </p>
+          <p class="t-copy">
+            She dug it out of the ground herself.
+          </p>
+        </div>
+        <div class="t-media">
+          <div class="t-pair" style="margin-bottom:0;">
+            <div class="t-img landscape" data-src="proposal%20photos/Treasure%20Hunt/JoshandNicole-94.jpg">
+              <img src="proposal%20photos/Treasure%20Hunt/JoshandNicole-94.jpg" alt="Finding the third chest · Chest Three · the future · Santorini" loading="lazy">
+            </div>
+            <div class="t-img landscape" data-src="proposal%20photos/Treasure%20Hunt/JoshandNicole-95.jpg">
+              <img src="proposal%20photos/Treasure%20Hunt/JoshandNicole-95.jpg" alt="Chest Three revealed · the custom painting · Josh and Danielle · Santorini" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── ACT 5: THE RECKONING ── -->
+      <div class="treasure-act" style="margin-bottom: 0;">
+        <span class="treasure-act-label" style="text-align:center; display:block;">The Reckoning</span>
+        <div class="t-reckoning">
+          <div class="t-img portrait" data-src="proposal%20photos/Treasure%20Hunt/JoshandNicole-97.jpg">
+            <img src="proposal%20photos/Treasure%20Hunt/JoshandNicole-97.jpg" alt="Danielle holding all three chests · back at the breakfast spot · Monolithos" loading="lazy">
+          </div>
+          <div class="t-img portrait" data-src="proposal%20photos/Treasure%20Hunt/JoshandNicole-102.jpg">
+            <img src="proposal%20photos/Treasure%20Hunt/JoshandNicole-102.jpg" alt="The Cartier pearl necklace · Chest Two · the present" loading="lazy">
+          </div>
+          <div class="t-img landscape" data-src="proposal%20photos/Treasure%20Hunt/JoshandNicole-100.jpg">
+            <img src="proposal%20photos/Treasure%20Hunt/JoshandNicole-100.jpg" alt="All three treasures laid out · the chip · the necklace · the painting" loading="lazy">
+          </div>
+          <div class="t-img landscape" data-src="proposal%20photos/Treasure%20Hunt/JoshandNicole-105.jpg">
+            <img src="proposal%20photos/Treasure%20Hunt/JoshandNicole-105.jpg" alt="The custom painting · Josh and Danielle · Santorini · Chest Three" loading="lazy">
+          </div>
+        </div>
+
+        <div class="treasure-fakeout">
+          <p class="fakeout-copy">
+            She carried all three back to the breakfast spot and laid them out in front of her.
+            The chip. The bread. The necklace. The painting.
+          </p>
+          <p class="fakeout-copy">
+            Past. Present. Future. A map drawn entirely in things he knew she would understand.
+          </p>
+          <p class="fakeout-copy">
+            She counted. Three chests. No fourth box.
+            She went through the logic again. Slowly.
+            She was absolutely certain the ring was in there somewhere.
+          </p>
+          <p class="fakeout-copy">
+            It wasn't.
+          </p>
+          <span class="fakeout-kicker">She had approximately ten more hours left in the day.<br>She had no idea.</span>
+        </div>
+      </div>
+
+      <ul class="story-detail" style="margin-top: 64px;">
+        <li>Inspired by a Nashville morning · Josh, Nick, and Danielle watching old men with metal detectors from the porch</li>
+        <li>Metal detectors waiting · three chests buried in the volcanic terrain</li>
+        <li>Chest 01 · The Past: Wynn casino chip + a piece of bread · first date at Jardin, Las Vegas</li>
+        <li>Chest 02 · The Present: Cartier pearl necklace</li>
+        <li>Chest 03 · The Future: Custom bespoke artwork · Josh &amp; Danielle · Santorini</li>
+        <li>The beautiful fake-out — she was certain. The day had more.</li>
+      </ul>
+
     </div>
 
     <!-- Full bleed interlude -->
@@ -1881,6 +2123,11 @@
     });
 
     lb.addEventListener('click', e => { if (e.target !== lbImg) closeLb(); });
+
+    // Treasure narrative image lightbox
+    document.querySelectorAll('.t-img img').forEach(img => {
+      img.parentElement.addEventListener('click', () => openLb(img.src, img.alt));
+    });
     document.getElementById('lb-close').addEventListener('click', closeLb);
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
 
