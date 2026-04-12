@@ -163,6 +163,9 @@
 
     /* ─── CHRONICLE WRAPPER ──────────────────────────────────── */
     .chronicle { background: #f8f5ef; }
+    .chronicle-body { background: transparent; }
+    /* Subtle warm separator between chapter band and body */
+    .chapter-band { padding-bottom: 0; }
 
     /* ─── CHAPTER BAND ───────────────────────────────────────── */
     .chapter-band {
@@ -189,10 +192,12 @@
 
     /* ─── CHRONICLE BODY ─────────────────────────────────────── */
     .chronicle-body {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 56px;
-      padding: 44px 80px 80px; align-items: start;
+      display: grid; grid-template-columns: 1fr 1.35fr; gap: 44px;
+      padding: 36px 80px 52px; align-items: start;
     }
     .chronicle-body.flip .chronicle-media { order: -1; }
+    .chronicle-text { padding-right: 44px; border-right: 1px solid rgba(201,169,110,.14); }
+    .chronicle-body.flip .chronicle-text { padding-right: 0; padding-left: 44px; border-right: none; border-left: 1px solid rgba(201,169,110,.14); }
 
     .story-copy {
       font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300;
@@ -207,26 +212,28 @@
     .story-detail li::before { content: '— '; color: #c9a96e; }
 
     /* ─── MEDIA SLOTS ────────────────────────────────────────── */
-    .chronicle-media { display: flex; flex-direction: column; gap: 6px; }
-    .media-row { display: flex; gap: 6px; }
+    .chronicle-media { display: flex; flex-direction: column; gap: 4px; }
+    .media-row { display: flex; gap: 4px; }
     .photo-slot {
-      background: #e8e2d9; border: 1px dashed rgba(201,169,110,.55);
+      background: #e8e2d9; border: 1px dashed rgba(201,169,110,.4);
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 10px; overflow: hidden; position: relative; flex: 1; transition: background .3s;
+      gap: 10px; overflow: hidden; position: relative; flex: 1;
+      transition: transform .45s ease, box-shadow .45s ease;
     }
-    .photo-slot:hover { background: #ddd7cc; }
-    .photo-slot.has-img { border: none; }
-    .photo-slot.has-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-    .slot-icon { font-size: 20px; color: rgba(201,169,110,.6); }
+    .photo-slot.has-img { border: none; cursor: zoom-in; }
+    .photo-slot.has-img:hover { transform: scale(1.012); box-shadow: 0 12px 48px rgba(0,0,0,.22); z-index: 2; }
+    .photo-slot.has-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+    .photo-slot.has-img:hover img { transform: scale(1.04); }
+    .slot-icon { font-size: 16px; color: rgba(201,169,110,.4); }
     .slot-label {
-      font-family: 'Montserrat', sans-serif; font-size: 8px; font-weight: 300;
-      letter-spacing: .3em; text-transform: uppercase; color: rgba(201,169,110,.8);
+      font-family: 'Montserrat', sans-serif; font-size: 7.5px; font-weight: 300;
+      letter-spacing: .3em; text-transform: uppercase; color: rgba(201,169,110,.55);
       text-align: center; padding: 0 14px; line-height: 1.8;
     }
-    .photo-slot.tall { aspect-ratio: 2/3; min-height: 300px; }
-    .photo-slot.portrait { aspect-ratio: 3/4; min-height: 260px; }
-    .photo-slot.landscape { aspect-ratio: 3/2; min-height: 200px; }
-    .photo-slot.square { aspect-ratio: 1; min-height: 180px; }
+    .photo-slot.tall { aspect-ratio: 2/3; min-height: 260px; }
+    .photo-slot.portrait { aspect-ratio: 3/4; min-height: 240px; }
+    .photo-slot.landscape { aspect-ratio: 3/2; min-height: 180px; }
+    .photo-slot.square { aspect-ratio: 1; min-height: 160px; }
 
     .video-slot {
       background: #111; border: 1px solid rgba(201,169,110,.25);
@@ -255,7 +262,7 @@
     /* ─── SECTION DIVIDER ────────────────────────────────────── */
     .section-divider {
       height: 1px;
-      background: linear-gradient(to right, transparent, rgba(201,169,110,.35), transparent);
+      background: linear-gradient(to right, transparent, rgba(201,169,110,.25) 20%, rgba(201,169,110,.45) 50%, rgba(201,169,110,.25) 80%, transparent);
       margin: 0 80px;
     }
 
@@ -293,7 +300,7 @@
       font-size: clamp(16px, 2vw, 22px); font-style: italic; font-weight: 300; color: rgba(255,255,255,.45);
     }
     .moment-grid {
-      display: grid; grid-template-columns: 1fr 1.4fr 1fr; gap: 6px; margin-bottom: 56px;
+      display: grid; grid-template-columns: 1fr 1.4fr 1fr; gap: 4px; margin-bottom: 56px;
     }
     .moment-grid .photo-slot { background: #1a1a1a; border-color: rgba(201,169,110,.2); }
     .moment-grid .photo-slot .slot-label { color: rgba(201,169,110,.5); }
@@ -402,17 +409,21 @@
 
     /* ─── INSTAGRAM VERTICAL PLAYER ─────────────────────────── */
     .ig-player-wrap {
-      display: flex; justify-content: center;
-      margin-top: 6px;
+      display: block;
+      margin-top: 4px;
     }
     .ig-player {
-      width: 100%; max-width: 340px;
+      width: 100%;
       aspect-ratio: 9/16;
-      border-radius: 18px;
+      border-radius: 10px;
       overflow: hidden;
       background: #000;
       position: relative;
-      box-shadow: 0 24px 60px rgba(0,0,0,.55), 0 0 0 1px rgba(201,169,110,.18);
+      box-shadow: 0 16px 48px rgba(0,0,0,.48), 0 0 0 1px rgba(201,169,110,.15);
+      transition: box-shadow .4s ease;
+    }
+    .ig-player:hover {
+      box-shadow: 0 24px 64px rgba(0,0,0,.6), 0 0 0 1px rgba(201,169,110,.32);
     }
     .ig-player video {
       width: 100%; height: 100%;
@@ -420,9 +431,17 @@
     }
     .ig-player-label {
       font-family: 'Montserrat', sans-serif; font-size: 8px; font-weight: 300;
-      letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.28);
-      text-align: center; padding-top: 12px;
+      letter-spacing: .3em; text-transform: uppercase; color: rgba(100,80,50,.5);
+      text-align: center; padding-top: 10px;
     }
+    /* Two videos side by side */
+    .video-pair {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 4px;
+    }
+    .video-pair .ig-player-wrap { margin-top: 0; }
+
+    /* ─── LIGHTBOX ───────────────────────────────────────────── */
+    #lightbox { -webkit-backdrop-filter: blur(8px); }
 
     /* ─── SCROLL REVEAL ──────────────────────────────────────── */
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity .95s ease, transform .95s ease; }
@@ -434,6 +453,8 @@
       .chapter-num-bg { font-size: 80px; }
       .chronicle-body { grid-template-columns: 1fr; gap: 36px; padding: 36px 32px 64px; }
       .chronicle-body.flip .chronicle-media { order: 0; }
+      .chronicle-text { padding-right: 0 !important; padding-left: 0 !important; border-right: none !important; border-left: none !important; }
+      .video-pair { grid-template-columns: 1fr 1fr; }
       .section-divider { margin: 0 32px; }
       .arrival-band { grid-template-columns: 1fr; gap: 36px; padding: 0 32px 72px; }
       .moment-section { padding: 72px 32px; }
@@ -572,7 +593,7 @@
           <img src="Daniellesleep.jpeg" alt="Danielle — the flight over" loading="lazy">
         </div>
       </div>
-      <div class="ig-player-wrap" style="margin-top:6px;">
+      <div class="ig-player-wrap">
         <div>
           <div class="ig-player">
             <video controls playsinline>
@@ -627,7 +648,7 @@
           <img src="images/hotel/canaves-room-2.jpg" alt="Private pool terrace — Canaves Oia Epitome" loading="lazy">
         </div>
       </div>
-      <div class="media-row" style="margin-top:6px;">
+      <div class="media-row">
         <div class="photo-slot portrait has-img">
           <img src="images/hotel/canaves-room-3.jpg" alt="Canaves Oia Epitome — villa" loading="lazy">
         </div>
@@ -671,7 +692,7 @@
           <img src="sphinx_winerestaurant.jpeg" alt="Sphinx Wine Restaurant — Oia, Santorini" loading="lazy">
         </div>
       </div>
-      <div class="ig-player-wrap" style="margin-top:6px;">
+      <div class="ig-player-wrap">
         <div>
           <div class="ig-player">
             <video controls playsinline>
@@ -818,24 +839,22 @@
             <img src="proposal%20photos/JoshandNicole-35.jpg" alt="Holding hands at sunrise on the black sand beach · Monolithos · Santorini" loading="lazy">
           </div>
         </div>
-        <div class="ig-player-wrap" style="margin-top:6px;">
-          <div>
+        <div class="video-pair">
+          <div class="ig-player-wrap">
             <div class="ig-player">
               <video controls playsinline>
                 <source src="Startmorningworkout.mp4" type="video/mp4" />
               </video>
             </div>
-            <p class="ig-player-label">The Workout Begins &nbsp;·&nbsp; Santorini &nbsp;·&nbsp; Before Sunrise</p>
+            <p class="ig-player-label">The Workout Begins &nbsp;·&nbsp; Before Sunrise</p>
           </div>
-        </div>
-        <div class="ig-player-wrap" style="margin-top:6px;">
-          <div>
+          <div class="ig-player-wrap">
             <div class="ig-player">
               <video controls playsinline>
                 <source src="Morningjog.mp4" type="video/mp4" />
               </video>
             </div>
-            <p class="ig-player-label">The Morning Jog &nbsp;·&nbsp; Vlychada Beach &nbsp;·&nbsp; Santorini</p>
+            <p class="ig-player-label">The Morning Jog &nbsp;·&nbsp; Monolithos Beach</p>
           </div>
         </div>
       </div>
@@ -956,7 +975,7 @@
             <img src="proposal%20photos/JoshandNicole-65.jpg" alt="Riding along the beach · volcanic cliffs · Santorini morning" loading="lazy">
           </div>
         </div>
-        <div class="ig-player-wrap" style="margin-top:6px;">
+        <div class="ig-player-wrap">
           <div>
             <div class="ig-player">
               <video controls playsinline>
@@ -1066,7 +1085,7 @@
             <img src="proposal%20photos/JoshandNicole-95.jpg" alt="Josh and Danielle in the volcanic crevice · black and white · Santorini" loading="lazy">
           </div>
         </div>
-        <div class="ig-player-wrap" style="margin-top:6px;">
+        <div class="ig-player-wrap">
           <div>
             <div class="ig-player">
               <video controls playsinline>
@@ -1452,6 +1471,57 @@
       if (!vid) return;
       slot.addEventListener('click', () => { vid.paused ? vid.play() : vid.pause(); });
     });
+
+    // 6. PHOTO LIGHTBOX
+    const lb = document.createElement('div');
+    lb.id = 'lightbox';
+    lb.style.cssText = `
+      position:fixed; inset:0; z-index:9000;
+      background:rgba(0,0,0,.94); backdrop-filter:blur(8px);
+      display:none; align-items:center; justify-content:center;
+      cursor:zoom-out; opacity:0; transition:opacity .3s ease;
+    `;
+    lb.innerHTML = `
+      <img id="lb-img" style="max-width:92vw; max-height:92vh; object-fit:contain;
+        border-radius:3px; box-shadow:0 32px 80px rgba(0,0,0,.8);
+        transform:scale(.96); transition:transform .35s ease; pointer-events:none;">
+      <div id="lb-caption" style="position:absolute; bottom:32px; left:50%; transform:translateX(-50%);
+        font-family:'Montserrat',sans-serif; font-size:9px; letter-spacing:.35em; text-transform:uppercase;
+        color:rgba(201,169,110,.6); white-space:nowrap; pointer-events:none;"></div>
+      <button id="lb-close" style="position:absolute; top:28px; right:36px; background:none; border:none;
+        color:rgba(255,255,255,.4); font-family:'Montserrat',sans-serif; font-size:10px;
+        letter-spacing:.3em; text-transform:uppercase; cursor:pointer; padding:8px;">Close</button>
+    `;
+    document.body.appendChild(lb);
+
+    const lbImg = document.getElementById('lb-img');
+    const lbCap = document.getElementById('lb-caption');
+
+    function openLb(src, alt) {
+      lbImg.src = src;
+      lbImg.style.transform = 'scale(.96)';
+      lbCap.textContent = alt || '';
+      lb.style.display = 'flex';
+      requestAnimationFrame(() => {
+        lb.style.opacity = '1';
+        lbImg.style.transform = 'scale(1)';
+      });
+    }
+    function closeLb() {
+      lb.style.opacity = '0';
+      lbImg.style.transform = 'scale(.96)';
+      setTimeout(() => { lb.style.display = 'none'; }, 300);
+    }
+
+    document.querySelectorAll('.photo-slot.has-img').forEach(slot => {
+      const img = slot.querySelector('img');
+      if (!img) return;
+      slot.addEventListener('click', () => openLb(img.src, img.alt));
+    });
+
+    lb.addEventListener('click', e => { if (e.target !== lbImg) closeLb(); });
+    document.getElementById('lb-close').addEventListener('click', closeLb);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
 
   </script>
 </body>
