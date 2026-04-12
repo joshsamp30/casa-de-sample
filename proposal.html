@@ -196,8 +196,15 @@
       padding: 36px 80px 52px; align-items: start;
     }
     .chronicle-body.flip .chronicle-media { order: -1; }
-    .chronicle-text { padding-right: 44px; border-right: 1px solid rgba(201,169,110,.14); }
-    .chronicle-body.flip .chronicle-text { padding-right: 0; padding-left: 44px; border-right: none; border-left: 1px solid rgba(201,169,110,.14); }
+    .chronicle-text {
+      padding-right: 44px; border-right: 1px solid rgba(201,169,110,.14);
+      position: sticky; top: 80px;
+    }
+    .chronicle-body.flip .chronicle-text {
+      padding-right: 0; padding-left: 44px; border-right: none;
+      border-left: 1px solid rgba(201,169,110,.14);
+      position: sticky; top: 80px;
+    }
 
     .story-copy {
       font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300;
@@ -230,10 +237,10 @@
       letter-spacing: .3em; text-transform: uppercase; color: rgba(201,169,110,.55);
       text-align: center; padding: 0 14px; line-height: 1.8;
     }
-    .photo-slot.tall { aspect-ratio: 2/3; min-height: 260px; }
-    .photo-slot.portrait { aspect-ratio: 3/4; min-height: 240px; }
-    .photo-slot.landscape { aspect-ratio: 3/2; min-height: 180px; }
-    .photo-slot.square { aspect-ratio: 1; min-height: 160px; }
+    .photo-slot.tall { aspect-ratio: 2/3; }
+    .photo-slot.portrait { aspect-ratio: 3/4; }
+    .photo-slot.landscape { aspect-ratio: 3/2; }
+    .photo-slot.square { aspect-ratio: 1; }
 
     .video-slot {
       background: #111; border: 1px solid rgba(201,169,110,.25);
@@ -453,7 +460,7 @@
       .chapter-num-bg { font-size: 80px; }
       .chronicle-body { grid-template-columns: 1fr; gap: 36px; padding: 36px 32px 64px; }
       .chronicle-body.flip .chronicle-media { order: 0; }
-      .chronicle-text { padding-right: 0 !important; padding-left: 0 !important; border-right: none !important; border-left: none !important; }
+      .chronicle-text { padding-right: 0 !important; padding-left: 0 !important; border-right: none !important; border-left: none !important; position: static !important; }
       .video-pair { grid-template-columns: 1fr 1fr; }
       .section-divider { margin: 0 32px; }
       .arrival-band { grid-template-columns: 1fr; gap: 36px; padding: 0 32px 72px; }
