@@ -400,6 +400,30 @@
       color: rgba(255,255,255,.2); text-transform: uppercase; width: 100%;
     }
 
+    /* ─── INSTAGRAM VERTICAL PLAYER ─────────────────────────── */
+    .ig-player-wrap {
+      display: flex; justify-content: center;
+      margin-top: 6px;
+    }
+    .ig-player {
+      width: 100%; max-width: 340px;
+      aspect-ratio: 9/16;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #000;
+      position: relative;
+      box-shadow: 0 24px 60px rgba(0,0,0,.55), 0 0 0 1px rgba(201,169,110,.18);
+    }
+    .ig-player video {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    .ig-player-label {
+      font-family: 'Montserrat', sans-serif; font-size: 8px; font-weight: 300;
+      letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.28);
+      text-align: center; padding-top: 12px;
+    }
+
     /* ─── SCROLL REVEAL ──────────────────────────────────────── */
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity .95s ease, transform .95s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -548,11 +572,15 @@
           <img src="Daniellesleep.jpeg" alt="Danielle — the flight over" loading="lazy">
         </div>
       </div>
-      <div style="margin-top:6px; background:#000;">
-        <video controls playsinline
-               style="width:100%; display:block; max-height:400px; object-fit:contain; background:#000;">
-          <source src="video_1_37572cb8c7a74a289d78d6ec9d52ac71.mp4" type="video/mp4" />
-        </video>
+      <div class="ig-player-wrap" style="margin-top:6px;">
+        <div>
+          <div class="ig-player">
+            <video controls playsinline>
+              <source src="video_1_37572cb8c7a74a289d78d6ec9d52ac71.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <p class="ig-player-label">Greece &nbsp;·&nbsp; The Intro</p>
+        </div>
       </div>
     </div>
   </div>
@@ -643,16 +671,15 @@
           <img src="sphinx_winerestaurant.jpeg" alt="Sphinx Wine Restaurant — Oia, Santorini" loading="lazy">
         </div>
       </div>
-      <div style="margin-top: 6px; background:#000; position:relative;">
-        <video controls playsinline
-               style="width:100%; display:block; max-height:420px; object-fit:contain; background:#000;">
-          <source src="Sphinx_instagramvideo.mp4" type="video/mp4" />
-        </video>
-        <p style="font-family:'Montserrat',sans-serif; font-size:8px; font-weight:300;
-                  letter-spacing:.3em; text-transform:uppercase; color:rgba(255,255,255,.3);
-                  text-align:center; padding:10px 0 12px;">
-          Sphinx Wine Restaurant &nbsp;·&nbsp; Oia, Santorini
-        </p>
+      <div class="ig-player-wrap" style="margin-top:6px;">
+        <div>
+          <div class="ig-player">
+            <video controls playsinline>
+              <source src="Sphinx_instagramvideo.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <p class="ig-player-label">Sphinx Wine Restaurant &nbsp;·&nbsp; Oia, Santorini</p>
+        </div>
       </div>
     </div>
   </div>
@@ -707,9 +734,8 @@
             <span class="slot-icon">＋</span>
             <span class="slot-label">The letter<br>at the desk · Oia lights outside</span>
           </div>
-          <div class="photo-slot tall">
-            <span class="slot-icon">＋</span>
-            <span class="slot-label">Danielle in the outfit<br>morning of July 9</span>
+          <div class="photo-slot tall has-img">
+            <img src="Pradaoutfit.jpg" alt="Danielle — the Prada outfit · morning of July 9" loading="lazy">
           </div>
         </div>
         <div class="media-row">
