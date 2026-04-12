@@ -143,6 +143,11 @@
       font-size: clamp(40px, 5vw, 70px); letter-spacing: .05em; color: #fff;
       line-height: 0.95; margin-bottom: 28px;
     }
+    .arrival-heading a {
+      color: inherit; text-decoration: none; border-bottom: 1px solid rgba(201,169,110,.4);
+      transition: border-color .3s;
+    }
+    .arrival-heading a:hover { border-color: #c9a96e; }
     .arrival-copy {
       font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 300;
       line-height: 1.85; color: rgba(255,255,255,.72); margin-bottom: 24px;
@@ -326,6 +331,40 @@
       letter-spacing: .45em; text-transform: uppercase; color: #c9a96e; font-style: normal;
     }
 
+    /* ─── CELEBRATION TEASER ─────────────────────────────────── */
+    .celebration-teaser {
+      background: #f8f5ef; padding: 0 80px 100px;
+    }
+    .teaser-inner {
+      border: 1px solid rgba(201,169,110,.45);
+      padding: 64px 72px;
+      display: grid; grid-template-columns: 1fr auto;
+      align-items: center; gap: 48px;
+    }
+    .teaser-label {
+      font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 300;
+      letter-spacing: .45em; text-transform: uppercase; color: #c9a96e; margin-bottom: 14px;
+    }
+    .teaser-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(32px, 4vw, 54px); letter-spacing: .05em; color: #1a1a1a; line-height: 1;
+      margin-bottom: 20px;
+    }
+    .teaser-copy {
+      font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 300;
+      line-height: 1.85; color: #555; max-width: 580px;
+    }
+    .teaser-link {
+      font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 300;
+      letter-spacing: .32em; text-transform: uppercase; color: #1a1a1a;
+      text-decoration: none; white-space: nowrap;
+      border: 1px solid rgba(201,169,110,.7); padding: 18px 32px;
+      transition: background .3s, color .3s;
+      display: inline-flex; align-items: center; gap: 14px;
+    }
+    .teaser-link::after { content: '→'; font-size: 14px; }
+    .teaser-link:hover { background: #1a1a1a; color: #c9a96e; border-color: #1a1a1a; }
+
     /* ─── BACK / NEXT BAR ────────────────────────────────────── */
     .nav-bar {
       background: #0d0d0d; padding: 40px 80px;
@@ -381,6 +420,8 @@
       .nav-bar { padding: 32px; }
       .full-bleed { aspect-ratio: 16/9; }
       .full-bleed-caption { padding: 28px 32px; }
+      .celebration-teaser { padding: 0 32px 80px; }
+      .teaser-inner { grid-template-columns: 1fr; gap: 32px; padding: 44px 36px; }
     }
     @media (max-width: 760px) {
       nav .desktop-links { display: none; }
@@ -400,6 +441,8 @@
       .nav-bar { padding: 28px 24px; }
       footer { padding: 48px 24px; flex-direction: column; align-items: flex-start; }
       .footer-links { flex-wrap: wrap; gap: 20px; }
+      .celebration-teaser { padding: 0 24px 72px; }
+      .teaser-inner { padding: 36px 28px; }
     }
 
   </style>
@@ -446,7 +489,7 @@
     </div>
     <div class="hero-datestamp">
       <span>Casa De Sample</span>
-      <span>Chapter One</span>
+      <span>The First Chapter</span>
       <span>Canaves Oia Epitome</span>
     </div>
     <div class="scroll-hint">&lt; scroll &gt;</div>
@@ -458,46 +501,57 @@
   ══════════════════════════════════════════════════════════ -->
   <section class="dark-intro reveal">
     <p class="pull-quote">
-      He didn't just plan a proposal.<br>
-      He planned an entire day — hour by hour, detail by detail —<br>
-      to make her feel like the lead in the story<br>
-      she'd always dreamed of living.
+      He didn't begin with a ring.<br>
+      He began six months earlier — with a plan.<br>
+      Every detail of July 9, 2022 was built deliberately.<br>
+      Not one hour left to chance.
     </p>
-    <p class="pull-attr">July 9, 2022 &nbsp;·&nbsp; Santorini, Greece</p>
+    <p class="pull-attr">Preserved with intention &nbsp;·&nbsp; For the generations that follow</p>
     <div class="gold-rule"></div>
   </section>
 
 
   <!-- ═══════════════════════════════════════════════════════
-       ARRIVAL — The Night Before & First Night
+       ARRIVAL — Dark section, hotel photos, hotel link
   ══════════════════════════════════════════════════════════ -->
   <div class="arrival-band reveal">
     <div class="arrival-text">
       <p class="arrival-label">Friday, July 8, 2022 &nbsp;·&nbsp; Arrival</p>
-      <h2 class="arrival-heading">Canaves Oia<br>Epitome</h2>
+      <h2 class="arrival-heading">
+        <a href="https://canaves.com/canaves-oia-epitome/" target="_blank" rel="noopener">Canaves Oia<br>Epitome</a>
+      </h2>
       <p class="arrival-copy">
-        It started in Los Angeles. Two flights, a layover in Montreal,
-        an overnight to Athens, and one final hop on Sky Express GQ346 —
-        and then the island appeared below the clouds. White and blue and unmistakable.
-        By the time Josh and Danielle landed at Santorini Airport, they had crossed
-        eleven time zones. Every mile of it was worth it.
+        Eleven time zones. Three flights. A red-eye layover in Montreal.
+        A turboprop from Athens on Sky Express GQ346, the island visible through the window
+        before the wheels touched down. White and blue and unmistakable. Santorini.
       </p>
       <p class="arrival-copy">
-        A VIP driver was waiting at arrivals, sign in hand. Sixteen minutes
-        of winding cliffside road, and then: Canaves Oia Epitome.
-        Their suite perched high above the caldera with views that stop you mid-sentence.
-        That evening, dinner at Sphinx Wine Restaurant — rooftop terrace,
-        candlelit, the Aegean sun dissolving into the horizon below their feet.
-        Neither of them knew the next evening would change everything.
+        The driver was waiting at arrivals. Sign in hand. Private VIP transfer —
+        sixteen minutes of winding caldera road. And then the gate opened onto something
+        extraordinary: Canaves Oia Epitome, Oia. Perched above the fishing town of Ammoudi.
+        Volcanic stone. Natural materials. The only resort on the island offering
+        sea and sunset views from every room.
+      </p>
+      <p class="arrival-copy">
+        Their suite: the Hideaway Pool Villa. Seventy square meters. King-size bed.
+        Private pool. Open-air dining terrace above the Aegean.
+        Josh had been carrying the ring for months.
+        That first night was just dinner.
+      </p>
+      <p class="arrival-copy">
+        Sphinx Wine Restaurant, Oia. Rooftop terrace. Sunset view. 19:30 reservation.
+        The kind of setting that makes any meal feel like a milestone.
+        Later that evening, a letter arrived at the room — an invitation for a sunrise hike
+        the next morning. She set it on the table. He had been thinking about it for half a year.
       </p>
       <ul class="arrival-detail">
-        <li>Departed Los Angeles (LAX) · July 7, 2022 · Air Canada AC 774</li>
-        <li>Layover Montreal (YUL) · overnight to Athens (ATH) · AC 898</li>
-        <li>Athens → Santorini · Sky Express GQ 346 · arrived 13:45 · July 8</li>
-        <li>Private VIP transfer · Santorini Airport → Canaves Oia Epitome, Oia</li>
-        <li>Hotel: Canaves Oia Epitome · 4 nights · Oia, Santorini</li>
-        <li>First night dinner: Sphinx Wine Restaurant · rooftop terrace · 19:30</li>
-        <li>That night: a letter arrived at the room, inviting her on a sunrise hike</li>
+        <li>LAX · Air Canada AC 774 · July 7 · departed 07:55</li>
+        <li>Montreal (YUL) layover · Air Canada AC 898 · overnight to Athens (ATH)</li>
+        <li>Athens · Sky Express GQ 346 · Santorini · arrived 13:45 · July 8</li>
+        <li>Private VIP transfer · Santorini Airport to Canaves Oia Epitome, Oia</li>
+        <li>Suite: Hideaway Pool Villa · 70 sq.m · private pool · sea view · 4 nights</li>
+        <li>Dinner: Sphinx Wine Restaurant · Oia rooftop terrace · 19:30</li>
+        <li>That night: an invitation letter, waiting on the desk</li>
       </ul>
     </div>
     <div class="arrival-media">
@@ -509,6 +563,14 @@
           <img src="images/hotel/canaves-room-2.jpg" alt="Private pool terrace — Canaves Oia Epitome" loading="lazy">
         </div>
       </div>
+      <div class="media-row" style="margin-top:6px;">
+        <div class="photo-slot portrait has-img">
+          <img src="images/hotel/canaves-room-3.jpg" alt="Canaves Oia Epitome — villa exterior" loading="lazy">
+        </div>
+        <div class="photo-slot portrait has-img">
+          <img src="images/hotel/canaves-room-4.jpg" alt="Canaves Oia Epitome — caldera view terrace" loading="lazy">
+        </div>
+      </div>
     </div>
   </div>
 
@@ -518,60 +580,59 @@
   ══════════════════════════════════════════════════════════ -->
   <div class="chronicle">
 
-    <!-- ─── CH 01 · THE MORNING ──────────────────────────── -->
+    <!-- ─── CH 01 · THE LETTER ──────────────────────────── -->
     <div class="chapter-band reveal">
       <span class="chapter-num-bg">01</span>
       <div class="chapter-meta">
-        <p class="chapter-tag">Chapter One &nbsp;·&nbsp; Saturday, July 9</p>
-        <h2 class="chapter-heading">The Morning</h2>
-        <p class="chapter-sub">A sunrise hike, hidden signs, and a breakfast she'll never forget</p>
+        <p class="chapter-tag">Chapter One &nbsp;·&nbsp; Friday Night, July 8</p>
+        <h2 class="chapter-heading">The Letter</h2>
+        <p class="chapter-sub">An invitation delivered to the door. She thought it was a morning hike.</p>
       </div>
     </div>
     <div class="chronicle-body reveal">
       <div class="chronicle-text">
         <p class="story-copy">
-          A letter arrived at the hotel room the night before. An invitation to
-          wake early and hike the Oia to Fira trail — the most scenic path on the island,
-          nine kilometers carved into the caldera rim. Josh had arranged designer sportswear
-          for Danielle to find waiting for her, so she'd look as effortlessly stunning
-          as the landscape around her.
+          The night before, a letter arrived at the door.
         </p>
         <p class="story-copy">
-          She had no idea the trail had been prepared for her. Tucked into volcanic rock
-          and wildflowers along the cliffside path, Josh had hidden small signs — each one
-          carrying a line from her favourite rom-coms. Lines she knew by heart.
-          "You had me at hello." A trail of love letters she could read with her feet.
+          She read it at the desk by the window, the lights of Oia still glowing outside.
+          An invitation for a sunrise hike the next morning — the Oia to Fira trail.
+          Nine kilometers along the caldera rim. Josh had written it like a suggestion.
+          He had written five drafts before this one.
         </p>
         <p class="story-copy">
-          The hike ended at a private terrace above the caldera — a rustic bohemian
-          breakfast spread laid out in the morning sun. Wood platters, champagne, fresh flowers,
-          Moroccan cushions. And somewhere nearby, a "tourist" couple with cameras
-          capturing every second she laughed and had no idea.
+          With the letter, a package. Designer sportswear, chosen specifically for her,
+          folded and placed on the chair. Something to wear on the trail. A small, considered gift.
+          The kind of detail that means nothing in isolation and everything in context.
+        </p>
+        <p class="story-copy">
+          She had no reason to suspect.
+          The letter read like a proposal of a morning, not a life.
+          It was, of course, both.
         </p>
         <ul class="story-detail">
-          <li>Invitation letter delivered to the room the night before</li>
-          <li>Designer sportswear arranged for Danielle to find on the morning</li>
-          <li>Hike: Oia to Fira trail · 9km along the caldera rim · ~3 hours</li>
-          <li>Hidden rom-com quote signs along the cliffside path</li>
-          <li>Bohemian breakfast setup: champagne, fresh fruit, flowers, Moroccan cushions</li>
-          <li>Secret photographer + videographer disguised as fellow hikers</li>
+          <li>Invitation letter hand-delivered to the hotel room</li>
+          <li>Designer sportswear chosen for Danielle — waiting on the chair</li>
+          <li>Cover story: sunrise hike along the Oia to Fira trail</li>
+          <li>Five drafts written before the final letter was sent</li>
+          <li>The plan had been running for six months before this evening</li>
         </ul>
       </div>
       <div class="chronicle-media">
         <div class="media-row">
           <div class="photo-slot tall">
             <span class="slot-icon">＋</span>
-            <span class="slot-label">Oia to Fira trail<br>sunrise hike</span>
+            <span class="slot-label">The letter<br>at the desk · Oia lights outside</span>
           </div>
           <div class="photo-slot tall">
             <span class="slot-icon">＋</span>
-            <span class="slot-label">Hidden sign<br>along the path</span>
+            <span class="slot-label">The gift package<br>designer sportswear</span>
           </div>
         </div>
         <div class="media-row">
           <div class="photo-slot landscape">
             <span class="slot-icon">＋</span>
-            <span class="slot-label">Bohemian breakfast spread<br>caldera terrace</span>
+            <span class="slot-label">Canaves Oia Epitome · the villa at night · Oia caldera beyond</span>
           </div>
         </div>
       </div>
@@ -579,62 +640,63 @@
 
     <div class="section-divider"></div>
 
-    <!-- ─── CH 02 · THE ADVENTURE ────────────────────────── -->
+    <!-- ─── CH 02 · THE MORNING ──────────────────────────── -->
     <div class="chapter-band reveal">
       <span class="chapter-num-bg">02</span>
       <div class="chapter-meta">
-        <p class="chapter-tag">Chapter Two &nbsp;·&nbsp; Saturday Afternoon</p>
-        <h2 class="chapter-heading">The Adventure</h2>
-        <p class="chapter-sub">Helicopter over the caldera, or horseback to the sea</p>
+        <p class="chapter-tag">Chapter Two &nbsp;·&nbsp; Saturday, July 9 · Before Dawn</p>
+        <h2 class="chapter-heading">The Morning</h2>
+        <p class="chapter-sub">Nine kilometers along the caldera rim. She had no idea it had been prepared for her.</p>
       </div>
     </div>
     <div class="chronicle-body flip reveal">
       <div class="chronicle-text">
         <p class="story-copy">
-          After breakfast, the day shifted into something cinematic.
-          Two options awaited — both ending at the same secluded beach,
-          both beginning with something Danielle had never experienced.
+          She was awake before the island.
         </p>
         <p class="story-copy">
-          A private helicopter lifted them above Santorini — the white-washed
-          cliffs and deep blue caldera reduced to a painting below. Or perhaps
-          it was horseback, riding through the island's volcanic terrain
-          along the black sand coastline until the sea opened in front of them,
-          quiet and entirely their own.
+          The Oia to Fira trail begins in darkness and opens into something extraordinary
+          as the sun lifts over the caldera. Nine kilometers of volcanic rock and wild flowers
+          carved into the caldera rim. One of the most scenic paths in the world.
+          She had no idea it had been prepared specifically for her.
         </p>
         <p class="story-copy">
-          Either way, it was the exhale before the crescendo. Time suspended
-          somewhere between sky and sea, with nothing but the sound of the Aegean
-          and the two of them.
+          Along the cliffside, tucked into the rock face at intervals, Josh had hidden
+          small framed signs. Each one carrying a line from one of her favourite rom-coms.
+          Lines she had quoted to him without ever knowing he was collecting them.
+          A trail of love letters she could read with her feet.
+        </p>
+        <p class="story-copy">
+          Three hours. The sun rising over the Aegean the whole way.
+          The trail ended at a private terrace above the caldera — a rustic bohemian
+          breakfast waiting in the morning light. Wood platters, champagne, fresh flowers,
+          Moroccan cushions. Somewhere nearby: a couple with cameras. Not strangers.
+          The photographer and videographer hired months before, disguised as fellow hikers,
+          capturing every second she laughed without knowing why.
         </p>
         <ul class="story-detail">
-          <li>Option A: Private helicopter flight over the Santorini caldera</li>
-          <li>Option B: Horseback ride through volcanic terrain to the coast</li>
-          <li>Both routes end at a secluded private beach</li>
-          <li>Drone footage captured from above</li>
+          <li>Hike: Oia to Fira trail · 9km along the caldera rim · ~3 hours</li>
+          <li>Hidden framed signs at intervals · lines from her favourite rom-coms</li>
+          <li>Private terrace above the caldera · bohemian breakfast setup</li>
+          <li>Champagne, fresh fruit, flowers, Moroccan cushions, morning light</li>
+          <li>Secret photographer and videographer disguised as fellow hikers</li>
         </ul>
       </div>
       <div class="chronicle-media">
         <div class="media-row">
-          <div class="photo-slot landscape">
+          <div class="photo-slot tall">
             <span class="slot-icon">＋</span>
-            <span class="slot-label">Helicopter above the caldera<br>Santorini from the air</span>
+            <span class="slot-label">Oia to Fira trail<br>sunrise · caldera below</span>
+          </div>
+          <div class="photo-slot tall">
+            <span class="slot-icon">＋</span>
+            <span class="slot-label">Hidden sign<br>along the cliffside path</span>
           </div>
         </div>
         <div class="media-row">
-          <div class="photo-slot portrait">
+          <div class="photo-slot landscape">
             <span class="slot-icon">＋</span>
-            <span class="slot-label">Horseback<br>volcanic coastline</span>
-          </div>
-          <div class="photo-slot portrait">
-            <span class="slot-icon">＋</span>
-            <span class="slot-label">Secluded beach<br>Aegean coast</span>
-          </div>
-        </div>
-        <div class="video-slot">
-          <div class="video-slot-overlay">
-            <div class="video-play"></div>
-            <span class="video-slot-label">Aerial footage &nbsp;·&nbsp; Santorini</span>
+            <span class="slot-label">Bohemian breakfast spread · private caldera terrace · champagne · morning sun</span>
           </div>
         </div>
       </div>
@@ -642,57 +704,60 @@
 
     <div class="section-divider"></div>
 
-    <!-- ─── CH 03 · THE TREASURE HUNT ───────────────────── -->
+    <!-- ─── CH 03 · THE TREASURE ────────────────────────── -->
     <div class="chapter-band reveal">
       <span class="chapter-num-bg">03</span>
       <div class="chapter-meta">
         <p class="chapter-tag">Chapter Three &nbsp;·&nbsp; The Beach</p>
-        <h2 class="chapter-heading">The Treasure Hunt</h2>
-        <p class="chapter-sub">Three chests. Past, present &amp; future — and a beautiful fake-out</p>
+        <h2 class="chapter-heading">The Treasure</h2>
+        <p class="chapter-sub">Three chests. Past, present, and the direction they were heading.</p>
       </div>
     </div>
     <div class="chronicle-body reveal">
       <div class="chronicle-text">
         <p class="story-copy">
           On the beach, three chests were waiting.
-          Josh had hidden them as a map of their entire story —
-          where they had come from, where they were standing,
-          and where they were going.
         </p>
         <p class="story-copy">
-          The first chest held the past — tickets back to Las Vegas,
-          the city where it all began. The second, the present —
-          a Cartier pearl necklace, chosen for the woman she had become.
-          The third looked forward — a small custom artwork of the two of them,
-          Greece in the background, because they would keep coming back.
+          Josh had placed them as a map of their story — where they had come from,
+          where they stood at that exact moment, and where they were going.
+          Not a gesture. An archive. Evidence of a relationship documented with intention.
         </p>
         <p class="story-copy">
-          By the time the third chest was open, Danielle surely thought
-          the moment had arrived. And then — the day continued on.
-          There was more. There was always going to be more.
+          The first chest held the past. Las Vegas tickets — back to the city where it began.
+          Where they first chose each other, before anyone had a name for what they were building.
+          The second chest held the present. A Cartier pearl necklace.
+          Chosen for the woman she had become.
+          The third chest looked forward. A custom artwork: Josh and Danielle,
+          Greece in the background. Because this island would always belong to them.
+        </p>
+        <p class="story-copy">
+          By the time the third chest opened, she was certain the moment had arrived.
+          The day would continue. There was always going to be more.
+          That restraint is what made the ending matter.
         </p>
         <ul class="story-detail">
-          <li>Chest 01 · The Past: Las Vegas tickets — where the story started</li>
+          <li>Chest 01 · The Past: Las Vegas tickets · where the story started</li>
           <li>Chest 02 · The Present: Cartier pearl necklace</li>
           <li>Chest 03 · The Future: Custom artwork · Josh &amp; Danielle · Greece</li>
-          <li>The beautiful fake-out — she thought it was coming, but the day had more</li>
+          <li>The beautiful fake-out — she was certain. The day had more.</li>
         </ul>
       </div>
       <div class="chronicle-media">
         <div class="media-row">
           <div class="photo-slot tall">
             <span class="slot-icon">＋</span>
-            <span class="slot-label">The three chests<br>on the beach</span>
+            <span class="slot-label">Three chests<br>on the beach</span>
           </div>
         </div>
         <div class="media-row">
           <div class="photo-slot square">
             <span class="slot-icon">＋</span>
-            <span class="slot-label">Cartier pearl necklace<br>chest 02</span>
+            <span class="slot-label">Cartier pearl necklace<br>chest 02 · the present</span>
           </div>
           <div class="photo-slot square">
             <span class="slot-icon">＋</span>
-            <span class="slot-label">Custom Greece artwork<br>chest 03</span>
+            <span class="slot-label">Custom artwork<br>chest 03 · the future</span>
           </div>
         </div>
       </div>
@@ -705,48 +770,49 @@
         <span class="slot-label">Wide establishing shot &nbsp;·&nbsp; Santorini caldera &nbsp;·&nbsp; full panorama</span>
       </div>
       <div class="full-bleed-caption">
-        <p>The island that held the secret for months.</p>
+        <p>The island that held the secret for six months.</p>
       </div>
     </div>
 
     <div class="section-divider" style="margin-top:0;"></div>
 
-    <!-- ─── CH 04 · AFTERNOON PT.2 ───────────────────────── -->
+    <!-- ─── CH 04 · THE AFTERNOON ───────────────────────── -->
     <div class="chapter-band reveal">
       <span class="chapter-num-bg">04</span>
       <div class="chapter-meta">
-        <p class="chapter-tag">Chapter Four &nbsp;·&nbsp; The Afternoon Continues</p>
-        <h2 class="chapter-heading">The Wine &amp;<br>The Water</h2>
-        <p class="chapter-sub">Massages, custom bottles, and a message on the cliffs</p>
+        <p class="chapter-tag">Chapter Four &nbsp;·&nbsp; Saturday Afternoon</p>
+        <h2 class="chapter-heading">The Wine<br>&amp; The Water</h2>
+        <p class="chapter-sub">Massages, custom bottles, a private boat — and a message on the cliffs.</p>
       </div>
     </div>
     <div class="chronicle-body flip reveal">
       <div class="chronicle-text">
         <p class="story-copy">
-          The afternoon unfolded at a pace that only Santorini permits.
-          Massages arranged near the secluded beach — the kind that dissolve
-          the concept of time entirely.
+          The afternoon moved at a pace that only this island permits.
         </p>
         <p class="story-copy">
-          Then came the wine tasting. But these weren't ordinary bottles.
-          Each label had been custom designed: photographs of Josh and Danielle,
-          their faces printed on the glass — and names for each bottle pulled
-          from the places they had traveled together, the moments that had
-          quietly defined them as a couple.
+          Massages arranged near the secluded beach. The kind that dissolve time entirely.
+          The kind you only experience when someone has thought of everything first.
         </p>
         <p class="story-copy">
-          If it was on a boat, something even more extraordinary waited.
-          As they drifted along the caldera cliffs, a message appeared on the
-          rock face above the waterline — carved into the island itself.
-          Four words that Josh had arranged to be displayed:
-          "I will not give up on you."
+          Then the wine tasting. Not ordinary bottles. Each label had been custom designed —
+          photographs of Josh and Danielle printed on the glass. Names for each bottle drawn
+          from places they had traveled together. The moments that quietly defined them
+          as a couple before either of them would have used that word.
+        </p>
+        <p class="story-copy">
+          Then the boat. Out on the caldera water — volcanic walls rising hundreds of feet above
+          the waterline. Moving slowly along the cliffs. And cut into the rock face
+          above the waterline, a message arranged weeks in advance:
+          I will not give up on you.
+          Four words. The kind that never make it into photographs
+          but stay with a person for the rest of their life.
         </p>
         <ul class="story-detail">
-          <li>Massages arranged at the secluded beach or hotel</li>
-          <li>Custom wine tasting: bottles labeled with their photos + names from their travels</li>
-          <li>Setup options: beach · hotel · private boat on the Aegean</li>
-          <li>If on the boat: message displayed on the caldera cliffs as they passed</li>
-          <li>"I Will Not Give Up On You" — lit on the cliffside</li>
+          <li>Massages arranged at the secluded beach</li>
+          <li>Custom wine tasting · bottles labeled with their photos and travel memories</li>
+          <li>Private boat on the Aegean · caldera drift</li>
+          <li>"I Will Not Give Up On You" · displayed on the cliffside as they passed</li>
         </ul>
       </div>
       <div class="chronicle-media">
@@ -757,13 +823,13 @@
           </div>
           <div class="photo-slot portrait">
             <span class="slot-icon">＋</span>
-            <span class="slot-label">Custom wine bottles<br>their photos · their story</span>
+            <span class="slot-label">Custom wine bottles<br>their story on the label</span>
           </div>
         </div>
         <div class="media-row">
           <div class="photo-slot landscape">
             <span class="slot-icon">＋</span>
-            <span class="slot-label">Private boat &nbsp;·&nbsp; caldera cliffs &nbsp;·&nbsp; the message</span>
+            <span class="slot-label">Private boat · caldera cliffs · the message on the rock face</span>
           </div>
         </div>
       </div>
@@ -771,43 +837,107 @@
 
     <div class="section-divider"></div>
 
-    <!-- ─── CH 05 · THE SETUP ────────────────────────────── -->
+    <!-- ─── CH 05 · THE WINERY ───────────────────────────── -->
     <div class="chapter-band reveal">
       <span class="chapter-num-bg">05</span>
       <div class="chapter-meta">
-        <p class="chapter-tag">Chapter Five &nbsp;·&nbsp; Back at the Hotel</p>
-        <h2 class="chapter-heading">The Setup</h2>
-        <p class="chapter-sub">A photoshoot that was never just a photoshoot</p>
+        <p class="chapter-tag">Chapter Five &nbsp;·&nbsp; Saturday Afternoon · Santo Wines, Pyrgos</p>
+        <h2 class="chapter-heading">The Winery</h2>
+        <p class="chapter-sub">Above the caldera. Assyrtiko in hand. Some of the best frames of the trip captured here.</p>
       </div>
     </div>
     <div class="chronicle-body reveal">
       <div class="chronicle-text">
         <p class="story-copy">
-          Back at Canaves Oia Epitome, a makeup artist knocked on the door.
-          The cover story was simple: there's a photoshoot planned before sunset.
-          Josh had also arranged for stylish dresses to be waiting for Danielle to
-          find as part of the makeover — every detail considered, every inch of her
-          experience curated.
+          Santo Wines. Pyrgos village, Santorini. The oldest and most respected
+          wine cooperative on the island — founded by the island's own farmers,
+          rooted in volcanic terroir that yields some of the most distinctive whites in Greece.
         </p>
         <p class="story-copy">
-          They walked together to Santorini's iconic blue church domes —
-          the photoshoot was real. The photographer was capturing it all.
-          What Danielle didn't know was that she was also being photographed
-          for the last time before becoming engaged.
+          Their terrace sits above the caldera. Wine Enthusiast Magazine named it the best place
+          in Santorini to taste wine while watching the sun descend over the water.
+          Recommended is an understatement.
         </p>
         <p class="story-copy">
-          Meanwhile, at the private proposal location, the final touches were being made.
-          A large heart installation was being built — pink florals, her favourite,
-          hundreds of candles, tealights. A table set for the occasion.
-          And the musicians, warming up to play one song.
+          The Assyrtiko. The island's signature grape — grown in soil that hasn't seen rain
+          in months, roots driving deep through volcanic ash to find moisture. Mineral. Precise.
+          It tastes like the island looks.
+        </p>
+        <p class="story-copy">
+          The photographer was still close. Some of the most quietly extraordinary images
+          from the entire trip were captured here — volcanic stone and golden afternoon light,
+          the caldera spread out below, two people carrying a secret between them that was
+          only hours away from becoming something permanent.
         </p>
         <ul class="story-detail">
-          <li>Makeup artist at Canaves Oia Epitome — the photoshoot cover story</li>
-          <li>Stylish dresses arranged for Danielle to find as part of the look</li>
-          <li>Photo session at the iconic blue church domes of Santorini</li>
-          <li>Meanwhile: large heart of pink florals being assembled at the venue</li>
-          <li>Hundreds of candles and tealights filling the space</li>
-          <li>Musicians positioned and ready to play "Unforgettable" by Kygo</li>
+          <li>Santo Wines · Pyrgos, Santorini · <a href="https://www.santowines.gr/" target="_blank" rel="noopener" style="color:#c9a96e; text-decoration:none;">santowines.gr</a></li>
+          <li>Oldest wine cooperative on the island · volcanic terroir · Assyrtiko</li>
+          <li>Terrace above the caldera · sunset views over the Aegean</li>
+          <li>Professional photography session · golden hour · volcanic stone backdrop</li>
+        </ul>
+      </div>
+      <div class="chronicle-media">
+        <div class="media-row">
+          <div class="photo-slot portrait">
+            <span class="slot-icon">＋</span>
+            <span class="slot-label">Santo Wines terrace<br>caldera view · Santorini</span>
+          </div>
+          <div class="photo-slot portrait">
+            <span class="slot-icon">＋</span>
+            <span class="slot-label">Assyrtiko<br>volcanic terroir · golden hour</span>
+          </div>
+        </div>
+        <div class="media-row">
+          <div class="photo-slot landscape">
+            <span class="slot-icon">＋</span>
+            <span class="slot-label">Josh &amp; Danielle · Santo Wines · caldera below · afternoon before the yes</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- ─── CH 06 · THE SETUP ────────────────────────────── -->
+    <div class="chapter-band reveal">
+      <span class="chapter-num-bg">06</span>
+      <div class="chapter-meta">
+        <p class="chapter-tag">Chapter Six &nbsp;·&nbsp; Saturday · Late Afternoon</p>
+        <h2 class="chapter-heading">The Setup</h2>
+        <p class="chapter-sub">A photoshoot that was never just a photoshoot. While she smiled for the camera, they built the rest.</p>
+      </div>
+    </div>
+    <div class="chronicle-body flip reveal">
+      <div class="chronicle-text">
+        <p class="story-copy">
+          Back at Canaves Oia Epitome, a makeup artist knocked on the door.
+        </p>
+        <p class="story-copy">
+          The cover story: a sunset photoshoot was planned.
+          Josh had also arranged dresses — choices waiting in the room, something elevated
+          to match the evening. She had no reason to question it.
+          It was exactly the kind of thing a trip like this called for.
+        </p>
+        <p class="story-copy">
+          They walked together to the iconic blue church domes of Oia.
+          The photographer framed every shot. The afternoon light was exact.
+          She was photographed for the last time before the story changed permanently.
+        </p>
+        <p class="story-copy">
+          What she didn't know: while she stood against Cycladic white-wash and blue dome,
+          a team was at work at the proposal site. A large heart being assembled — pink florals,
+          her favourite. Built floor to edge, bloom by bloom. Around the full perimeter,
+          hundreds of candles and tealights being placed, one by one. A table set for the occasion.
+          Musicians warming up to play one song.
+          She was being photographed. He was watching the clock. The island was holding its breath.
+        </p>
+        <ul class="story-detail">
+          <li>Makeup artist at Canaves Oia Epitome · the photoshoot cover</li>
+          <li>Dresses arranged and waiting · something chosen for the evening</li>
+          <li>Photo session · iconic blue church domes of Oia</li>
+          <li>Meanwhile: large heart of pink florals assembled at the venue</li>
+          <li>Hundreds of candles and tealights placed across the full perimeter</li>
+          <li>Live musicians positioned · warming up to play Kygo "Unforgettable"</li>
         </ul>
       </div>
       <div class="chronicle-media">
@@ -818,13 +948,13 @@
           </div>
           <div class="photo-slot portrait">
             <span class="slot-icon">＋</span>
-            <span class="slot-label">Getting ready<br>the photoshoot cover</span>
+            <span class="slot-label">Getting ready<br>the photoshoot</span>
           </div>
         </div>
         <div class="media-row">
           <div class="photo-slot landscape">
             <span class="slot-icon">＋</span>
-            <span class="slot-label">The floral heart<br>being set up at the venue</span>
+            <span class="slot-label">The floral heart being built · hundreds of pink blooms · candles set · venue prepared</span>
           </div>
         </div>
       </div>
@@ -841,15 +971,15 @@
   <section class="moment-section">
 
     <div class="moment-header reveal">
-      <p class="moment-eyebrow">Chapter Six &nbsp;·&nbsp; Saturday, July 9, 2022 &nbsp;·&nbsp; Sunset</p>
+      <p class="moment-eyebrow">Chapter Seven &nbsp;·&nbsp; Saturday, July 9, 2022 &nbsp;·&nbsp; Sunset</p>
       <h2 class="moment-title">The<br>Moment</h2>
-      <p class="moment-subtitle">Sunset, pink florals, one question — and yes.</p>
+      <p class="moment-subtitle">Pink florals. Candlelight. One question. Yes.</p>
     </div>
 
     <div class="moment-grid reveal">
       <div class="photo-slot portrait">
         <span class="slot-icon">＋</span>
-        <span class="slot-label">Walking to the<br>proposal site</span>
+        <span class="slot-label">Walking to<br>the proposal site</span>
       </div>
       <div class="photo-slot tall">
         <span class="slot-icon">＋</span>
@@ -857,39 +987,38 @@
       </div>
       <div class="photo-slot portrait">
         <span class="slot-icon">＋</span>
-        <span class="slot-label">The ring &amp;<br>the reaction</span>
+        <span class="slot-label">The ring<br>the reaction</span>
       </div>
     </div>
 
     <div class="moment-story reveal">
       <p class="moment-copy">
-        At sunset, Josh led Danielle to the proposal site.
-        As they arrived, she was guided to the center of a large heart —
-        thousands of pink florals, her absolute favourite, surrounded by
-        hundreds of candles and tealights casting gold light across
-        the Santorini terrace above the caldera.
-        <br><br>
-        Kygo's "Unforgettable" began to play — live musicians filling the evening air
-        with the song that had been theirs long before this moment.
-        The photographer was positioned. The videographer was rolling.
-        The drone was in the sky above the island.
-        <br><br>
-        And Josh got down on one knee.
-        <br><br>
-        She said yes.
-        They toasted with champagne under the Santorini stars,
-        the caldera glowing beneath them, and had dinner for the first time
-        as Josh and Danielle — engaged.
+        At sunset, Josh led Danielle to the proposal site.<br><br>
+        She walked into the centre of a large heart. Thousands of pink florals — her favourite,
+        her colour, every bloom placed for this exact evening. Around the full perimeter,
+        hundreds of candles and tealights. Gold light across the terrace above the caldera.<br><br>
+        Kygo's Unforgettable began to play. Live musicians. The song that had belonged to them
+        long before this night had a name for itself.<br><br>
+        The photographer was positioned. The videographer was rolling at ground level.
+        A drone was above the island.<br><br>
+        And Josh got down on one knee.<br><br>
+        She said yes.<br><br>
+        They toasted with champagne while the caldera glowed beneath them.
+        Had dinner under the Santorini stars for the first time as Josh and Danielle — engaged.<br><br>
+        The kind of evening that doesn't need embellishment.
+        It needs only to be preserved exactly as it was.
+        For the generations that follow.
       </p>
       <ul class="moment-details">
-        <li>Large heart installation · pink florals · Danielle's favourite</li>
-        <li>Hundreds of candles and tealights around the perimeter</li>
-        <li>Live musicians performing Kygo "Unforgettable"</li>
-        <li>Professional photographer capturing every angle</li>
-        <li>Videographer filming the full proposal from ground level</li>
-        <li>Drone footage above the caldera at golden hour</li>
-        <li>Champagne toast immediately after the yes</li>
-        <li>Dinner under the stars · caldera views · Canaves Oia Epitome</li>
+        <li>Large heart · pink florals · her favourite · built floor to edge</li>
+        <li>Hundreds of candles and tealights · full perimeter</li>
+        <li>Live musicians · Kygo "Unforgettable"</li>
+        <li>Professional photographer · multiple angles</li>
+        <li>Videographer · ground level · full coverage</li>
+        <li>Drone footage · golden hour above the caldera</li>
+        <li>Champagne toast · the first seconds after yes</li>
+        <li>Dinner under the stars · Canaves Oia Epitome</li>
+        <li>The first meal as Josh &amp; Danielle · engaged</li>
       </ul>
     </div>
 
@@ -912,72 +1041,32 @@
   ══════════════════════════════════════════════════════════ -->
   <section class="gold-quote reveal">
     <blockquote>
-      She said yes on a cliffside above the Aegean,<br>
-      surrounded by pink florals and candlelight<br>
-      and a love that had been building since Las Vegas.
+      She said yes on a cliffside above the Aegean.<br>
+      Pink florals. Candlelight.<br>
+      A love that had been building since Las Vegas.
     </blockquote>
     <cite>Santorini, Greece &nbsp;·&nbsp; July 9, 2022</cite>
   </section>
 
 
   <!-- ═══════════════════════════════════════════════════════
-       CH 07 · THE CELEBRATION
+       CELEBRATION TEASER — Links to sub-page
   ══════════════════════════════════════════════════════════ -->
-  <div class="chronicle" style="padding-bottom: 100px;">
-
-    <div class="chapter-band reveal">
-      <span class="chapter-num-bg">07</span>
-      <div class="chapter-meta">
-        <p class="chapter-tag">Chapter Seven &nbsp;·&nbsp; Ibiza · July 16, 2022</p>
-        <h2 class="chapter-heading">The Celebration</h2>
-        <p class="chapter-sub">Amante Ibiza. Dinner for ten. The people who helped build this love.</p>
-      </div>
-    </div>
-
-    <div class="chronicle-body flip reveal">
-      <div class="chronicle-text">
-        <p class="story-copy">
-          The story didn't end at yes. It opened into something even more beautiful.
-          One week after the proposal, on July 16th, the ten people who mattered most
-          gathered at Amante Ibiza — a clifftop restaurant perched above the Mediterranean,
-          where the sea meets the sky and the light turns gold at dusk.
+  <div class="celebration-teaser reveal">
+    <div class="teaser-inner">
+      <div class="teaser-text">
+        <p class="teaser-label">What Came Next &nbsp;·&nbsp; Ibiza · July 16, 2022</p>
+        <h2 class="teaser-title">The Celebration</h2>
+        <p class="teaser-copy">
+          What happened next involved ten people, a clifftop above the Mediterranean,
+          and the first dinner they sat down to as the newly engaged.
+          One week later. Amante Ibiza. A long table overlooking the sea.
+          The people who helped build this love — gathered, together, for the first time with a reason to raise a glass.
+          That chapter is its own story. It lives here.
         </p>
-        <p class="story-copy">
-          Dinner for ten. The nearest and dearest. A long table overlooking the water,
-          candlelit, draped in flowers, Spanish touches woven throughout the setting.
-          The kind of dinner you feel in your chest long after the plates are cleared —
-          the laughter, the tears, the stories, the toasts.
-          Everyone leaving wanting more and already excited about the wedding day ahead.
-        </p>
-        <ul class="story-detail">
-          <li>Amante Ibiza · clifftop restaurant · above the Mediterranean</li>
-          <li>Saturday, July 16, 2022 · dinner for ten</li>
-          <li>Nearest and dearest — family and closest friends</li>
-          <li>Candlelit table with overhead florals · golden hour over the sea</li>
-          <li>Spanish touches throughout the setting to reflect the location</li>
-          <li>The first celebration as the newly engaged Josh &amp; Danielle</li>
-        </ul>
       </div>
-      <div class="chronicle-media">
-        <div class="media-row">
-          <div class="photo-slot portrait">
-            <span class="slot-icon">＋</span>
-            <span class="slot-label">Engagement dinner<br>Ibiza, waterside</span>
-          </div>
-          <div class="photo-slot portrait">
-            <span class="slot-icon">＋</span>
-            <span class="slot-label">The table setting<br>ornate florals</span>
-          </div>
-        </div>
-        <div class="media-row">
-          <div class="photo-slot landscape">
-            <span class="slot-icon">＋</span>
-            <span class="slot-label">Family &amp; friends<br>the full table · the celebration</span>
-          </div>
-        </div>
-      </div>
+      <a href="celebration.html" class="teaser-link">The Celebration</a>
     </div>
-
   </div>
 
 
@@ -997,7 +1086,7 @@
       <li><a href="#">Baby</a></li>
       <li><a href="#">More</a></li>
     </ul>
-    <p class="footer-copy">© 2026 Casa De Sample</p>
+    <p class="footer-copy">© 2026 Casa De Sample &nbsp;·&nbsp; Every Milestone. Every Memory. Preserved with intention.</p>
   </footer>
 
 
