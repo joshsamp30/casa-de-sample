@@ -462,6 +462,47 @@
     }
     .video-pair .ig-player-wrap { grid-column: auto; }
 
+    /* ─── HOTEL CAROUSEL ────────────────────────────────────── */
+    .hotel-carousel {
+      position: relative; overflow: hidden;
+      aspect-ratio: 3/4; border-radius: 3px;
+    }
+    .hotel-carousel-track {
+      display: flex; height: 100%;
+      transition: transform .7s cubic-bezier(.77,0,.18,1);
+    }
+    .hotel-slide {
+      min-width: 100%; height: 100%; flex-shrink: 0; overflow: hidden;
+    }
+    .hotel-slide img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .7s ease;
+    }
+    .hotel-carousel-dots {
+      position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 8px; z-index: 10;
+    }
+    .hc-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(255,255,255,.35); cursor: pointer;
+      transition: background .3s, transform .3s;
+    }
+    .hc-dot.active { background: #c9a96e; transform: scale(1.3); }
+    .hc-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(0,0,0,.32); border: 1px solid rgba(255,255,255,.18);
+      color: rgba(255,255,255,.75); font-size: 14px;
+      width: 36px; height: 36px; border-radius: 50%;
+      cursor: pointer; z-index: 10;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .25s, opacity .25s;
+      opacity: 0;
+    }
+    .hotel-carousel:hover .hc-arrow { opacity: 1; }
+    .hc-arrow:hover { background: rgba(0,0,0,.6); }
+    .hc-prev { left: 14px; }
+    .hc-next { right: 14px; }
+
     /* ─── LIGHTBOX ───────────────────────────────────────────── */
     #lightbox { -webkit-backdrop-filter: blur(8px); }
 
@@ -650,21 +691,29 @@
       </ul>
     </div>
     <div class="arrival-media">
-      <div class="media-row">
-        <div class="photo-slot tall has-img">
-          <img src="images/hotel/canaves-room-1.jpg" alt="Hideaway Pool Villa — Canaves Oia Epitome" loading="lazy">
+      <div class="hotel-carousel" id="hotelCarousel">
+        <div class="hotel-carousel-track" id="hotelTrack">
+          <div class="hotel-slide">
+            <img src="images/hotel/canaves-room-1.jpg" alt="Hideaway Pool Villa — Canaves Oia Epitome" loading="lazy">
+          </div>
+          <div class="hotel-slide">
+            <img src="images/hotel/canaves-room-2.jpg" alt="Private pool terrace — Canaves Oia Epitome" loading="lazy">
+          </div>
+          <div class="hotel-slide">
+            <img src="images/hotel/canaves-room-3.jpg" alt="Canaves Oia Epitome — villa" loading="lazy">
+          </div>
+          <div class="hotel-slide">
+            <img src="images/hotel/canaves-room-4.jpg" alt="Canaves Oia Epitome — caldera terrace" loading="lazy">
+          </div>
         </div>
-        <div class="photo-slot tall has-img">
-          <img src="images/hotel/canaves-room-2.jpg" alt="Private pool terrace — Canaves Oia Epitome" loading="lazy">
+        <div class="hotel-carousel-dots" id="hotelDots">
+          <span class="hc-dot active" data-idx="0"></span>
+          <span class="hc-dot" data-idx="1"></span>
+          <span class="hc-dot" data-idx="2"></span>
+          <span class="hc-dot" data-idx="3"></span>
         </div>
-      </div>
-      <div class="media-row">
-        <div class="photo-slot portrait has-img">
-          <img src="images/hotel/canaves-room-3.jpg" alt="Canaves Oia Epitome — villa" loading="lazy">
-        </div>
-        <div class="photo-slot portrait has-img">
-          <img src="images/hotel/canaves-room-4.jpg" alt="Canaves Oia Epitome — caldera terrace" loading="lazy">
-        </div>
+        <button class="hc-arrow hc-prev" id="hcPrev">&#8592;</button>
+        <button class="hc-arrow hc-next" id="hcNext">&#8594;</button>
       </div>
     </div>
   </div>
@@ -1483,7 +1532,32 @@
       slot.addEventListener('click', () => { vid.paused ? vid.play() : vid.pause(); });
     });
 
-    // 6. PHOTO LIGHTBOX
+    // 6. HOTEL CAROUSEL
+    (function() {
+      const track = document.getElementById('hotelTrack');
+      const dots  = document.querySelectorAll('.hc-dot');
+      if (!track) return;
+      let cur = 0, total = 4, timer;
+
+      function goTo(n) {
+        cur = (n + total) % total;
+        track.style.transform = `translateX(-${cur * 100}%)`;
+        dots.forEach((d, i) => d.classList.toggle('active', i === cur));
+      }
+
+      function next() { goTo(cur + 1); }
+
+      function startAuto() { timer = setInterval(next, 3800); }
+      function resetAuto()  { clearInterval(timer); startAuto(); }
+
+      document.getElementById('hcNext').addEventListener('click', () => { next(); resetAuto(); });
+      document.getElementById('hcPrev').addEventListener('click', () => { goTo(cur - 1); resetAuto(); });
+      dots.forEach(d => d.addEventListener('click', () => { goTo(+d.dataset.idx); resetAuto(); }));
+
+      startAuto();
+    })();
+
+    // 7. PHOTO LIGHTBOX (click any photo to open full screen)
     const lb = document.createElement('div');
     lb.id = 'lightbox';
     lb.style.cssText = `
