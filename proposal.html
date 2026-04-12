@@ -192,24 +192,15 @@
 
     /* ─── CHRONICLE BODY ─────────────────────────────────────── */
     .chronicle-body {
-      display: block;
-      padding: 40px 0 56px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      padding: 40px 80px 72px;
+      align-items: start;
     }
-    .chronicle-body.flip .chronicle-media { order: 0; }
-    .chronicle-text {
-      max-width: 660px;
-      margin: 0 auto 44px;
-      padding: 0 80px;
-      border: none;
-      position: static;
-    }
-    .chronicle-body.flip .chronicle-text {
-      max-width: 660px;
-      margin: 0 auto 44px;
-      padding: 0 80px;
-      border: none;
-      position: static;
-    }
+    .chronicle-body.flip .chronicle-text { order: 2; }
+    .chronicle-body.flip .chronicle-media { order: 1; }
+    .chronicle-text { }
 
     .story-copy {
       font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300;
@@ -224,11 +215,7 @@
     .story-detail li::before { content: '— '; color: #c9a96e; }
 
     /* ─── MEDIA SLOTS ────────────────────────────────────────── */
-    .chronicle-media {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4px;
-    }
+    .chronicle-media { }
     .media-row { display: contents; }
     .photo-slot {
       background: #e8e2d9; border: 1px dashed rgba(201,169,110,.4);
@@ -503,6 +490,57 @@
     .hc-prev { left: 14px; }
     .hc-next { right: 14px; }
 
+
+    /* ─── CHRONICLE CAROUSEL ───────────────────────────────── */
+    .ch-carousel {
+      position: relative; overflow: hidden;
+      border-radius: 3px; aspect-ratio: 3/4;
+      background: #e0d9cf;
+    }
+    .ch-carousel-track {
+      display: flex; height: 100%;
+      transition: transform .7s cubic-bezier(.77,0,.18,1);
+    }
+    .ch-slide {
+      height: 100%; flex-shrink: 0;
+      overflow: hidden; position: relative;
+    }
+    .ch-slide img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .6s ease; display: block;
+    }
+    .ch-slide video {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .ch-slide.placeholder {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 10px;
+      background: #e8e2d9; border: 1px dashed rgba(201,169,110,.4);
+    }
+    .ch-carousel-dots {
+      position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 7px; z-index: 10;
+    }
+    .ch-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(26,26,26,.22); cursor: pointer;
+      transition: background .3s, transform .3s;
+    }
+    .ch-dot.active { background: #c9a96e; transform: scale(1.3); }
+    .ch-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(0,0,0,.3); border: 1px solid rgba(255,255,255,.2);
+      color: rgba(255,255,255,.8); font-size: 14px;
+      width: 36px; height: 36px; border-radius: 50%;
+      cursor: pointer; z-index: 10;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .25s, opacity .25s; opacity: 0;
+    }
+    .ch-carousel:hover .ch-arrow { opacity: 1; }
+    .ch-arrow:hover { background: rgba(0,0,0,.6); }
+    .ch-prev { left: 14px; }
+    .ch-next { right: 14px; }
+
     /* ─── LIGHTBOX ───────────────────────────────────────────── */
     #lightbox { -webkit-backdrop-filter: blur(8px); }
 
@@ -514,10 +552,10 @@
     @media (max-width: 900px) {
       .chapter-band { padding: 52px 28px 0; }
       .chapter-num-bg { font-size: 80px; }
-      .chronicle-body { padding: 32px 0 52px; }
-      .chronicle-media { grid-template-columns: 1fr; }
-      .photo-slot.landscape { aspect-ratio: 4/3; grid-column: 1; }
-      .chronicle-text { padding: 0 28px !important; }
+      .chronicle-body { grid-template-columns: 1fr; gap: 32px; padding: 32px 28px 52px; }
+      .chronicle-body.flip .chronicle-text { order: 1; }
+      .chronicle-body.flip .chronicle-media { order: 2; }
+      .ch-carousel { aspect-ratio: 4/3; }
       .video-pair { grid-template-columns: 1fr 1fr; }
       .section-divider { margin: 0 32px; }
       .arrival-band { grid-template-columns: 1fr; padding: 0 28px 60px; }
@@ -811,8 +849,8 @@
         </p>
         <p class="story-copy">
           He had written it five times.
-          Not because the words were hard to find —
-          because they had to be exactly right.
+          Not because the words were hard to find.
+          Because they had to be exactly right.
           A letter that said everything without saying too much.
           An invitation that felt like a suggestion.
           It was neither.
@@ -823,8 +861,16 @@
           Something she would put on without thinking twice
           and feel exactly like herself in.
           The story he needed her to believe was simple —
-          an early morning, a workout, a beautiful day.
+          an early morning, a workout, a beautiful day ahead.
           She believed it.
+        </p>
+        <p class="story-copy">
+          What she didn't know: six months of planning
+          had already moved through this room.
+          The ring was hidden. The day was built.
+          Every hour of July 9th had been placed in sequence —
+          and she was about to step into it
+          thinking she was just getting dressed for a workout.
         </p>
         <p class="story-copy">
           The letter read like the beginning of a morning.
@@ -840,14 +886,22 @@
         </ul>
       </div>
       <div class="chronicle-media">
-        <div class="media-row">
-          <div class="photo-slot tall">
-            <span class="slot-icon">＋</span>
-            <span class="slot-label">The letter<br>at the desk · Oia lights outside</span>
+        <div class="ch-carousel" id="ch01Carousel">
+          <div class="ch-carousel-track">
+            <div class="ch-slide placeholder">
+              <span class="slot-icon">＋</span>
+              <span class="slot-label">The letter<br>at the desk · Oia lights outside</span>
+            </div>
+            <div class="ch-slide">
+              <img src="Pradaoutfit.jpg" alt="Danielle — the Prada outfit · morning of July 9" loading="lazy">
+            </div>
           </div>
-          <div class="photo-slot tall has-img">
-            <img src="Pradaoutfit.jpg" alt="Danielle — the Prada outfit · morning of July 9" loading="lazy">
+          <div class="ch-carousel-dots">
+            <span class="ch-dot active" data-idx="0"></span>
+            <span class="ch-dot" data-idx="1"></span>
           </div>
+          <button class="ch-arrow ch-prev">&#8592;</button>
+          <button class="ch-arrow ch-next">&#8594;</button>
         </div>
       </div>
     </div>
@@ -878,70 +932,78 @@
         </p>
         <p class="story-copy">
           So Josh fixed that. He found a personal trainer on the island.
-          He sent him Barry's class recordings. He bought a Barry's shirt online
-          and had it shipped to Greece. The trainer wore it.
-          And as the sun came up over Santorini, they did the class by the water —
-          Danielle in the Prada outfit from the chair, both of them working through
-          the session while the caldera glowed orange behind them.
-          She had no idea it had been engineered for her. She just thought it was a great morning.
-          It was.
+          Sent him Barry's class recordings in advance. Bought a Barry's shirt online
+          and had it shipped to Santorini. The trainer wore it.
+          And as the sun came up over the caldera, they worked through the session together —
+          Danielle in the Prada outfit from the chair, both of them moving
+          while the water turned orange behind them.
+          She had no idea it had all been engineered for her.
+          She just thought it was a great morning. It was.
         </p>
         <p class="story-copy">
-          After the workout, a hike along the beach.
-          At intervals, small framed signs placed along the path — each one carrying a line
-          from one of her favourite rom-coms. Lines she had quoted to Josh without ever
-          knowing he had been collecting them. A trail of love letters she could read with her feet.
+          After the workout, they jogged along Monolithos beach.
+          At intervals along the path — small framed signs, each carrying a line
+          from one of her favourite rom-coms. Lines she had quoted to Josh over the years
+          without ever knowing he had been collecting them.
+          A trail she could read with her feet. Every sign placed by Josh.
+          Every line chosen.
+        </p>
+        <p class="story-copy">
+          The photographer was somewhere close.
+          She didn't know that either.
         </p>
         <ul class="story-detail">
           <li>Driver · <a href="https://www.instagram.com/klsbulldog/" target="_blank" rel="noopener" style="color:rgba(201,169,110,.7); text-decoration:none;">@klsbulldog</a> · on site before sunrise · with them the entire day</li>
-          <li>Barry's Bootcamp recreated on the island · trainer sourced · shirt shipped from the US · class recordings sent</li>
+          <li>Barry's Bootcamp recreated on the island · trainer sourced · shirt shipped from the US · class recordings sent in advance</li>
           <li>Workout by the water at sunrise · Danielle in the Prada outfit</li>
-          <li>Beach hike along Monolithos · volcanic black sand · framed rom-com signs placed along the path</li>
-          <li>Secret photographer and videographer in place the whole time</li>
+          <li>Beach jog along Monolithos · volcanic black sand · framed rom-com signs placed along the path</li>
+          <li>Secret photographer and videographer in place from the first moment</li>
         </ul>
       </div>
       <div class="chronicle-media">
-        <div class="ig-player-wrap">
-          <div class="ig-player">
-            <video controls playsinline>
-              <source src="Startmorningworkout.mp4" type="video/mp4" />
-            </video>
+        <div class="ch-carousel" id="ch02Carousel">
+          <div class="ch-carousel-track">
+            <div class="ch-slide" style="background:#000;">
+              <video controls playsinline style="width:100%;height:100%;object-fit:cover;">
+                <source src="Startmorningworkout.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <div class="ch-slide">
+              <img src="proposal%20photos/JoshandNicole-10.jpg" alt="The hike through volcanic rock formations · Santorini" loading="lazy">
+            </div>
+            <div class="ch-slide">
+              <img src="proposal%20photos/JoshandNicole-15.jpg" alt="Josh and Danielle hiking hand in hand up the volcanic rocks · Monolithos" loading="lazy">
+            </div>
+            <div class="ch-slide">
+              <img src="proposal%20photos/JoshandNicole-25.jpg" alt="Walking the beach together · volcanic cliffs · Santorini morning light" loading="lazy">
+            </div>
+            <div class="ch-slide">
+              <img src="proposal%20photos/JoshandNicole-45.jpg" alt="Danielle alone in the volcanic terrain · Monolithos · morning light" loading="lazy">
+            </div>
+            <div class="ch-slide">
+              <img src="proposal%20photos/JoshandNicole-55.jpg" alt="Rom-com sign along the beach path · Monolithos" loading="lazy">
+            </div>
+            <div class="ch-slide">
+              <img src="proposal%20photos/JoshandNicole-35.jpg" alt="Holding hands at sunrise on the black sand beach · Monolithos" loading="lazy">
+            </div>
+            <div class="ch-slide" style="background:#000;">
+              <video controls playsinline style="width:100%;height:100%;object-fit:cover;">
+                <source src="Morningjog.mp4" type="video/mp4" />
+              </video>
+            </div>
           </div>
-          <p class="ig-player-label">05:20 &nbsp;·&nbsp; The Workout Begins &nbsp;·&nbsp; Santorini</p>
-        </div>
-        <div class="media-row">
-          <div class="photo-slot tall has-img">
-            <img src="proposal%20photos/JoshandNicole-10.jpg" alt="The hike through volcanic rock formations · Santorini" loading="lazy">
+          <div class="ch-carousel-dots">
+            <span class="ch-dot active" data-idx="0"></span>
+            <span class="ch-dot" data-idx="1"></span>
+            <span class="ch-dot" data-idx="2"></span>
+            <span class="ch-dot" data-idx="3"></span>
+            <span class="ch-dot" data-idx="4"></span>
+            <span class="ch-dot" data-idx="5"></span>
+            <span class="ch-dot" data-idx="6"></span>
+            <span class="ch-dot" data-idx="7"></span>
           </div>
-          <div class="photo-slot tall has-img">
-            <img src="proposal%20photos/JoshandNicole-15.jpg" alt="Josh and Danielle hiking hand in hand up the volcanic rocks · Monolithos" loading="lazy">
-          </div>
-        </div>
-        <div class="media-row">
-          <div class="photo-slot portrait has-img">
-            <img src="proposal%20photos/JoshandNicole-25.jpg" alt="Walking the beach together · volcanic cliffs · Santorini morning light" loading="lazy">
-          </div>
-          <div class="photo-slot portrait has-img">
-            <img src="proposal%20photos/JoshandNicole-45.jpg" alt="Danielle alone in the volcanic terrain · Monolithos · morning light" loading="lazy">
-          </div>
-        </div>
-        <div class="media-row">
-          <div class="photo-slot landscape has-img">
-            <img src="proposal%20photos/JoshandNicole-55.jpg" alt="Rom-com sign along the beach path · Monolithos" loading="lazy">
-          </div>
-        </div>
-        <div class="media-row">
-          <div class="photo-slot landscape has-img">
-            <img src="proposal%20photos/JoshandNicole-35.jpg" alt="Holding hands at sunrise on the black sand beach · Monolithos · Santorini" loading="lazy">
-          </div>
-        </div>
-        <div class="ig-player-wrap">
-          <div class="ig-player">
-            <video controls playsinline>
-              <source src="Morningjog.mp4" type="video/mp4" />
-            </video>
-          </div>
-          <p class="ig-player-label">06:00 &nbsp;·&nbsp; Jogging to Breakfast &nbsp;·&nbsp; Monolithos Beach</p>
+          <button class="ch-arrow ch-prev">&#8592;</button>
+          <button class="ch-arrow ch-next">&#8594;</button>
         </div>
       </div>
     </div>
@@ -963,52 +1025,65 @@
           They came around a bend in the beach and there it was.
         </p>
         <p class="story-copy">
-          A romantic bohemian picnic — set as if it had always belonged on that stretch of black sand.
+          A bohemian picnic — set as if it had always belonged on that stretch of black sand.
           A handbuilt teepee draped in macramé and fresh flowers. Wood platters with pastries and fruit.
           Champagne already open. Moroccan cushions. Candles burning in morning light.
           A table so intentional it looked like a magazine spread.
           A team had built it in the dark hours before they arrived.
         </p>
         <p class="story-copy">
-          They sat together while the sun climbed behind the volcanic cliffs.
+          She didn't see it coming. You never do when it's done right.
+          One moment, a beach walk. The next — this.
+          The volcanic cliffs behind it. The black sand beneath.
+          The sun just clearing the ridge.
+        </p>
+        <p class="story-copy">
+          They sat together while the morning moved around them.
           The photographer was somewhere nearby — disguised as a fellow hiker,
           capturing every second she didn't know was being captured.
           This was one of those moments.
+          The kind that only exist once. The kind worth building from scratch.
         </p>
         <ul class="story-detail">
           <li>Bohemian teepee picnic · macramé · fresh flowers · Moroccan cushions</li>
           <li>Wood platters · pastries · champagne · candlelight at sunrise</li>
-          <li>Set on Monolithos black sand beach against the volcanic cliffs</li>
-          <li>Built overnight by the planning team · discovered on the hike</li>
-          <li>Photographer and videographer present · disguised · every moment captured</li>
+          <li>Monolithos black sand beach · volcanic cliffs · early morning light</li>
+          <li>Built overnight · the planning team was there before either of them woke</li>
+          <li>Photographer present · disguised · every moment captured without her knowing</li>
         </ul>
       </div>
       <div class="chronicle-media">
-        <div class="media-row">
-          <div class="photo-slot portrait has-img">
-            <img src="proposal%20photos/JoshandNicole-2.jpg" alt="Teepee detail · macramé · flowers · bohemian picnic setup · Monolithos" loading="lazy">
+        <div class="ch-carousel" id="ch03Carousel">
+          <div class="ch-carousel-track">
+            <div class="ch-slide">
+              <img src="proposal%20photos/JoshandNicole-2.jpg" alt="Teepee detail · macramé · flowers · bohemian picnic setup · Monolithos" loading="lazy">
+            </div>
+            <div class="ch-slide">
+              <img src="proposal%20photos/JoshandNicole-3.jpg" alt="Picnic table close-up · candles · breakfast spread · Monolithos beach" loading="lazy">
+            </div>
+            <div class="ch-slide">
+              <img src="proposal%20photos/JoshandNicole-7.jpg" alt="The full teepee setup against the volcanic cliffs · Monolithos" loading="lazy">
+            </div>
+            <div class="ch-slide">
+              <img src="proposal%20photos/JoshandNicole-30.jpg" alt="Stumbling across the bohemian picnic breakfast · Santorini beach at sunrise" loading="lazy">
+            </div>
+            <div class="ch-slide">
+              <img src="proposal%20photos/JoshandNicole-38.jpg" alt="Josh and Danielle at the picnic together · champagne · morning light" loading="lazy">
+            </div>
+            <div class="ch-slide">
+              <img src="proposal%20photos/JoshandNicole-42.jpg" alt="Danielle at the picnic · volcanic cliffs behind · Monolithos" loading="lazy">
+            </div>
           </div>
-          <div class="photo-slot portrait has-img">
-            <img src="proposal%20photos/JoshandNicole-3.jpg" alt="Picnic table close-up · candles · breakfast spread · Monolithos beach" loading="lazy">
+          <div class="ch-carousel-dots">
+            <span class="ch-dot active" data-idx="0"></span>
+            <span class="ch-dot" data-idx="1"></span>
+            <span class="ch-dot" data-idx="2"></span>
+            <span class="ch-dot" data-idx="3"></span>
+            <span class="ch-dot" data-idx="4"></span>
+            <span class="ch-dot" data-idx="5"></span>
           </div>
-        </div>
-        <div class="media-row">
-          <div class="photo-slot landscape has-img">
-            <img src="proposal%20photos/JoshandNicole-7.jpg" alt="The full teepee setup against the volcanic cliffs · Monolithos" loading="lazy">
-          </div>
-        </div>
-        <div class="media-row">
-          <div class="photo-slot landscape has-img">
-            <img src="proposal%20photos/JoshandNicole-30.jpg" alt="Stumbling across the bohemian picnic breakfast · Santorini beach at sunrise" loading="lazy">
-          </div>
-        </div>
-        <div class="media-row">
-          <div class="photo-slot portrait has-img">
-            <img src="proposal%20photos/JoshandNicole-38.jpg" alt="Josh and Danielle at the picnic together · champagne · morning light" loading="lazy">
-          </div>
-          <div class="photo-slot portrait has-img">
-            <img src="proposal%20photos/JoshandNicole-42.jpg" alt="Danielle at the picnic · volcanic cliffs behind · Monolithos" loading="lazy">
-          </div>
+          <button class="ch-arrow ch-prev">&#8592;</button>
+          <button class="ch-arrow ch-next">&#8594;</button>
         </div>
       </div>
     </div>
@@ -1030,46 +1105,51 @@
           After breakfast, horses were waiting.
         </p>
         <p class="story-copy">
-          They rode up the beach and back down — the volcanic cliffs on one side,
-          the Aegean on the other. At one point Danielle's horse spooked.
+          They rode up the beach and back down.
+          The volcanic cliffs on one side, the Aegean on the other.
+          At one point Danielle's horse spooked.
           She nearly got thrown. Josh watched it happen and quietly kept it together.
-          She held on. The photographer caught all of it.
+          She held on. The photographer caught every second of it.
         </p>
         <p class="story-copy">
-          On the way back down the beach, they passed the same rom-com signs from the hike.
-          Same words. Different angle. A second chance to read them from horseback —
-          and she still didn't know those signs were only part of the message.
+          On the way back down the beach, they passed the same rom-com signs from the morning hike.
+          Same words. New angle. A second chance to read them — this time from horseback.
+          She still didn't know those signs were only part of the message.
         </p>
         <p class="story-copy">
-          The horses eventually brought them to the next stop.
-          She still didn't know what the day was building toward.
+          It was already 09:00. The day had barely started.
+          The horses brought them to the next stop.
+          She still had no idea where it was all going.
         </p>
         <ul class="story-detail">
           <li>Horseback riding along Monolithos beach · up and back down the shore</li>
-          <li>Danielle's horse spooked · she almost got thrown · held on</li>
+          <li>Danielle's horse spooked · she nearly got thrown · held on</li>
           <li>Passed the rom-com signs again on horseback · same words, new perspective</li>
+          <li>09:00 — still two more chapters before the afternoon even began</li>
         </ul>
       </div>
       <div class="chronicle-media">
-        <div class="media-row">
-          <div class="photo-slot tall has-img">
-            <img src="proposal%20photos/JoshandNicole-75.jpg" alt="Josh and Danielle on horseback · Monolithos beach · Santorini" loading="lazy">
-          </div>
-        </div>
-        <div class="media-row">
-          <div class="photo-slot landscape has-img">
-            <img src="proposal%20photos/JoshandNicole-65.jpg" alt="Riding along the beach · volcanic cliffs · Santorini morning" loading="lazy">
-          </div>
-        </div>
-        <div class="ig-player-wrap">
-          <div>
-            <div class="ig-player">
-              <video controls playsinline>
+        <div class="ch-carousel" id="ch04Carousel">
+          <div class="ch-carousel-track">
+            <div class="ch-slide">
+              <img src="proposal%20photos/JoshandNicole-75.jpg" alt="Josh and Danielle on horseback · Monolithos beach · Santorini" loading="lazy">
+            </div>
+            <div class="ch-slide">
+              <img src="proposal%20photos/JoshandNicole-65.jpg" alt="Riding along the beach · volcanic cliffs · Santorini morning" loading="lazy">
+            </div>
+            <div class="ch-slide" style="background:#000;">
+              <video controls playsinline style="width:100%;height:100%;object-fit:cover;">
                 <source src="Horseback.MOV" type="video/mp4" />
               </video>
             </div>
-            <p class="ig-player-label">The Ride &nbsp;·&nbsp; Vlychada Beach &nbsp;·&nbsp; Santorini</p>
           </div>
+          <div class="ch-carousel-dots">
+            <span class="ch-dot active" data-idx="0"></span>
+            <span class="ch-dot" data-idx="1"></span>
+            <span class="ch-dot" data-idx="2"></span>
+          </div>
+          <button class="ch-arrow ch-prev">&#8592;</button>
+          <button class="ch-arrow ch-next">&#8594;</button>
         </div>
       </div>
     </div>
@@ -1095,31 +1175,27 @@
           hungover, the morning slow, the city still going somewhere below them.
           Across the way, a group of older men were out with metal detectors,
           working a patch of ground like they had all the time in the world.
-          Methodical. Unhurried. Finding things. That image stayed with Josh long after the weekend ended.
+          Methodical. Unhurried. Finding things. That image stayed with Josh
+          long after the weekend ended.
         </p>
         <p class="story-copy">
-          He wanted to give Danielle a bachelor-style proposal day. Big moments. Real stakes.
-          Something that felt like it was built specifically for her —
-          not a single gesture but a whole production with chapters.
-          The metal detectors were her chapter. A treasure hunt, built like the real thing.
+          He wanted to give Danielle a proposal day with real chapters.
+          Not a single gesture. A production. Each hour built like a scene.
+          The metal detectors were her chapter. A treasure hunt — built like the real thing.
         </p>
         <p class="story-copy">
-          Three chests were hidden in the volcanic terrain.
-          Metal detectors were waiting when they arrived.
+          Three chests. Hidden in the volcanic terrain. Metal detectors waiting on arrival.
           She had to find them. That was the game.
-          The stakes were higher than she knew.
-        </p>
-        <p class="story-copy">
-          Josh had placed the chests as a map of their story — where they had come from,
-          where they stood at that exact moment, and where they were going.
-          Not a gesture. An archive. Evidence of a relationship documented with intention.
+          The stakes were much higher than she knew.
         </p>
         <p class="story-copy">
           The first chest held the past. A Wynn casino chip — and a piece of bread.
-          Their first date was at Jardin in Las Vegas. Early morning. Danielle would only eat bread
-          that day, watching what she had, because the pools were coming. Josh had to leave before it got late.
+          Their first date was at Jardin in Las Vegas. Early morning. Danielle watched what she ate
+          that day because the pools were coming. Josh left before it got late.
           He never forgot that morning. The chip was from the Wynn. The bread was the whole story.
           Neither of them needed a caption. She knew exactly what it meant.
+        </p>
+        <p class="story-copy">
           The second chest held the present. A Cartier pearl necklace.
           Chosen for the woman she had become.
           The third chest looked forward. A custom artwork: Josh and Danielle,
@@ -1127,62 +1203,63 @@
         </p>
         <p class="story-copy">
           By the time the third chest opened, she was certain the moment had arrived.
-          The day would continue. There was always going to be more.
-          That restraint is what made the ending matter.
+          The day had more. That restraint is what made the ending matter.
         </p>
         <ul class="story-detail">
-          <li>Inspired by a hungover morning in Nashville · Josh, Nick, and Danielle watching old men find buried treasure on the porch</li>
-          <li>Metal detectors waiting on arrival · three chests hidden in the volcanic terrain</li>
-          <li>Chest 01 · The Past: A Wynn casino chip · a piece of bread · their first date at Jardin, Las Vegas</li>
+          <li>Inspired by a Nashville morning · Josh, Nick, and Danielle watching old men with metal detectors from the porch</li>
+          <li>Metal detectors waiting · three chests buried in the volcanic terrain</li>
+          <li>Chest 01 · The Past: Wynn casino chip + a piece of bread · first date at Jardin, Las Vegas</li>
           <li>Chest 02 · The Present: Cartier pearl necklace</li>
           <li>Chest 03 · The Future: Custom bespoke artwork · Josh &amp; Danielle · Santorini</li>
           <li>The beautiful fake-out — she was certain. The day had more.</li>
         </ul>
       </div>
       <div class="chronicle-media">
-        <div class="media-row">
-          <div class="photo-slot portrait has-img">
-            <img src="proposal%20photos/JoshandNicole-81.jpg" alt="Danielle smiling · metal detector in hand · found something · Santorini" loading="lazy">
-          </div>
-          <div class="photo-slot portrait has-img">
-            <img src="proposal%20photos/JoshandNicole-83.jpg" alt="Danielle laughing · holding a find · metal detector · Santorini" loading="lazy">
-          </div>
-        </div>
-        <div class="media-row">
-          <div class="photo-slot landscape has-img">
-            <img src="proposal%20photos/JoshandNicole-91.jpg" alt="Josh watching from the foreground as Danielle hunts in the distance · wide shot" loading="lazy">
-          </div>
-        </div>
-        <div class="media-row">
-          <div class="photo-slot portrait has-img">
-            <img src="proposal%20photos/JoshandNicole-88.jpg" alt="Josh and Danielle together examining a find · volcanic terrain · Santorini" loading="lazy">
-          </div>
-          <div class="photo-slot portrait has-img">
-            <img src="proposal%20photos/JoshandNicole-98.jpg" alt="Danielle's hands holding the treasure chest · the reveal" loading="lazy">
-          </div>
-        </div>
-        <div class="media-row">
-          <div class="photo-slot square has-img">
-            <img src="proposal%20photos/JoshandNicole-85.jpg" alt="Danielle with the metal detector · finding the chest · Santorini" loading="lazy">
-          </div>
-          <div class="photo-slot square has-img">
-            <img src="proposal%20photos/JoshandNicole-100.jpg" alt="Treasure chest contents · Cartier necklace · Santorini artwork" loading="lazy">
-          </div>
-        </div>
-        <div class="media-row">
-          <div class="photo-slot landscape has-img">
-            <img src="proposal%20photos/JoshandNicole-95.jpg" alt="Josh and Danielle in the volcanic crevice · black and white · Santorini" loading="lazy">
-          </div>
-        </div>
-        <div class="ig-player-wrap">
-          <div>
-            <div class="ig-player">
-              <video controls playsinline>
+        <div class="ch-carousel" id="ch05Carousel">
+          <div class="ch-carousel-track">
+            <div class="ch-slide">
+              <img src="proposal%20photos/JoshandNicole-81.jpg" alt="Danielle smiling · metal detector in hand · Santorini" loading="lazy">
+            </div>
+            <div class="ch-slide">
+              <img src="proposal%20photos/JoshandNicole-83.jpg" alt="Danielle laughing · holding a find · metal detector · Santorini" loading="lazy">
+            </div>
+            <div class="ch-slide">
+              <img src="proposal%20photos/JoshandNicole-91.jpg" alt="Josh watching from the foreground as Danielle hunts · wide shot" loading="lazy">
+            </div>
+            <div class="ch-slide">
+              <img src="proposal%20photos/JoshandNicole-88.jpg" alt="Josh and Danielle together examining a find · volcanic terrain" loading="lazy">
+            </div>
+            <div class="ch-slide">
+              <img src="proposal%20photos/JoshandNicole-85.jpg" alt="Danielle with the metal detector · finding the chest · Santorini" loading="lazy">
+            </div>
+            <div class="ch-slide">
+              <img src="proposal%20photos/JoshandNicole-98.jpg" alt="Danielle's hands holding the treasure chest · the reveal" loading="lazy">
+            </div>
+            <div class="ch-slide">
+              <img src="proposal%20photos/JoshandNicole-100.jpg" alt="Treasure chest contents · Cartier necklace · Santorini artwork" loading="lazy">
+            </div>
+            <div class="ch-slide">
+              <img src="proposal%20photos/JoshandNicole-95.jpg" alt="Josh and Danielle in the volcanic crevice · Santorini" loading="lazy">
+            </div>
+            <div class="ch-slide" style="background:#000;">
+              <video controls playsinline style="width:100%;height:100%;object-fit:cover;">
                 <source src="dector%20hunt.MOV" type="video/mp4" />
               </video>
             </div>
-            <p class="ig-player-label">The Metal Detector Hunt &nbsp;·&nbsp; Santorini &nbsp;·&nbsp; Danielle Finds the Chests</p>
           </div>
+          <div class="ch-carousel-dots">
+            <span class="ch-dot active" data-idx="0"></span>
+            <span class="ch-dot" data-idx="1"></span>
+            <span class="ch-dot" data-idx="2"></span>
+            <span class="ch-dot" data-idx="3"></span>
+            <span class="ch-dot" data-idx="4"></span>
+            <span class="ch-dot" data-idx="5"></span>
+            <span class="ch-dot" data-idx="6"></span>
+            <span class="ch-dot" data-idx="7"></span>
+            <span class="ch-dot" data-idx="8"></span>
+          </div>
+          <button class="ch-arrow ch-prev">&#8592;</button>
+          <button class="ch-arrow ch-next">&#8594;</button>
         </div>
       </div>
     </div>
@@ -1215,43 +1292,59 @@
         </p>
         <p class="story-copy">
           They had already done more before noon than most people do in a week on holiday.
+          A Barry's class. A hike. A bohemian picnic breakfast. Horseback riding.
+          A treasure hunt with three buried chests.
+          All of it before 09:00. All of it captured. None of it expected.
+        </p>
+        <p class="story-copy">
           An hour and a half later, a knock on the door.
-          Couple massages — booked and ready. Another piece of the day Josh had arranged
-          months before they ever landed on the island.
+          Couple massages — booked and ready.
+          Another piece of the day Josh had arranged months before they ever landed on the island.
+          The afternoon belonged to them. Quiet. Intentional.
+          The kind of break that makes the next moment feel even more earned.
         </p>
         <p class="story-copy">
-          Then lunch. Private transfer to Ammoudi Bay — the tiny fishing port
-          tucked below Oia at the base of the volcanic cliffs. 300 steps down, the sea
-          right at the table edge. Lunch at Ammoudi Tavern Restaurant.
-          Traditional. Quiet. The water so clear the boats look like they're floating on glass.
+          Then lunch. Private transfer to Ammoudi Bay —
+          the tiny fishing port tucked below Oia at the base of the volcanic cliffs.
+          300 steps down from the village. The sea right at the table edge.
+          Lunch at Ammoudi Tavern Restaurant. Traditional. Quiet.
+          The water so clear the boats look like they're floating on glass.
         </p>
         <p class="story-copy">
-          The afternoon had its own rhythm. The evening had not yet announced itself.
+          The afternoon had its own rhythm.
+          The evening had not yet announced itself.
         </p>
         <ul class="story-detail">
-          <li>09:15 — returned to Canaves Oia Epitome after the morning</li>
-          <li>11:00 — couple massages booked at the hotel · arranged months in advance</li>
+          <li>09:15 — returned to Canaves Oia Epitome · five chapters already complete</li>
+          <li>11:00 — couple massages at the hotel · booked months in advance</li>
           <li>13:15 — private transfer to Ammoudi Bay</li>
-          <li>Lunch at Ammoudi Tavern Restaurant · traditional tavern · Aegean at the table</li>
-          <li>Ammoudi Bay · the fishing port below Oia · 300 volcanic steps down from the village</li>
+          <li>Ammoudi Tavern Restaurant · traditional Greek · Aegean right at the table</li>
+          <li>Ammoudi Bay · 300 volcanic steps below Oia · the fishing port at the caldera's edge</li>
         </ul>
       </div>
       <div class="chronicle-media">
-        <div class="media-row">
-          <div class="photo-slot portrait">
-            <span class="slot-icon">＋</span>
-            <span class="slot-label">Couple massages<br>Canaves Oia Epitome</span>
+        <div class="ch-carousel" id="ch06Carousel">
+          <div class="ch-carousel-track">
+            <div class="ch-slide placeholder">
+              <span class="slot-icon">＋</span>
+              <span class="slot-label">Couple massages<br>Canaves Oia Epitome</span>
+            </div>
+            <div class="ch-slide placeholder">
+              <span class="slot-icon">＋</span>
+              <span class="slot-label">Ammoudi Bay<br>the fishing port below Oia</span>
+            </div>
+            <div class="ch-slide placeholder">
+              <span class="slot-icon">＋</span>
+              <span class="slot-label">Ammoudi Tavern Restaurant<br>Aegean at the table</span>
+            </div>
           </div>
-          <div class="photo-slot portrait">
-            <span class="slot-icon">＋</span>
-            <span class="slot-label">Ammoudi Bay<br>the fishing port below Oia</span>
+          <div class="ch-carousel-dots">
+            <span class="ch-dot active" data-idx="0"></span>
+            <span class="ch-dot" data-idx="1"></span>
+            <span class="ch-dot" data-idx="2"></span>
           </div>
-        </div>
-        <div class="media-row">
-          <div class="photo-slot landscape">
-            <span class="slot-icon">＋</span>
-            <span class="slot-label">Ammoudi Tavern Restaurant · Aegean · lunch before the evening</span>
-          </div>
+          <button class="ch-arrow ch-prev">&#8592;</button>
+          <button class="ch-arrow ch-next">&#8594;</button>
         </div>
       </div>
     </div>
@@ -1270,42 +1363,55 @@
     <div class="chronicle-body reveal">
       <div class="chronicle-text">
         <p class="story-copy">
-          After Imerovigli they transferred to Pyrgos — the hilltop village at the centre
-          of the island. Medieval streets. Volcanic stone walls. The highest point on Santorini,
-          with the caldera spread out in every direction.
+          After Imerovigli, they transferred to Pyrgos —
+          the hilltop village at the centre of the island.
+          Medieval streets. Volcanic stone walls. The highest point on Santorini,
+          with the caldera spread out in every direction below.
         </p>
         <p class="story-copy">
-          The photographer was still close. This was the second location —
-          golden hour, 18:30, the light doing exactly what Santorini light does at that hour.
-          Some of the most extraordinary frames from the entire trip were captured here.
+          The photographer was still close. Always close.
+          This was the second photoshoot location — golden hour, 18:30.
+          Santorini light at that time of day does something unusual.
+          It lands sideways. Warm. Long shadows against white stone.
+          Some of the most extraordinary frames from the entire day were taken here.
         </p>
         <p class="story-copy">
           She thought this was the point of the evening.
-          She was one hour from Venetsanos Winery. She didn't know that yet.
+          A photoshoot at golden hour in a medieval hilltop village.
+          That's already remarkable. She was satisfied. Content.
+          She was also one hour from Venetsanos Winery.
+          She didn't know that yet.
         </p>
         <ul class="story-detail">
-          <li>Pyrgos Village · highest point on Santorini · medieval hilltop · caldera views</li>
-          <li>Second photoshoot location · 18:30–19:45 · golden hour</li>
-          <li>Professional photographer · full coverage · volcanic stone backdrop</li>
-          <li>19:45 — transfer to Venetsanos Winery</li>
+          <li>Pyrgos Village · highest point on Santorini · medieval hilltop · caldera panorama</li>
+          <li>Second photoshoot location · 18:30 · golden hour · volcanic stone backdrop</li>
+          <li>Professional photographer · full coverage · every frame captured</li>
+          <li>19:45 — transfer to Venetsanos Winery · the last chapter</li>
         </ul>
       </div>
       <div class="chronicle-media">
-        <div class="media-row">
-          <div class="photo-slot portrait">
-            <span class="slot-icon">＋</span>
-            <span class="slot-label">Pyrgos Village<br>caldera view · golden hour</span>
+        <div class="ch-carousel" id="ch07Carousel">
+          <div class="ch-carousel-track">
+            <div class="ch-slide placeholder">
+              <span class="slot-icon">＋</span>
+              <span class="slot-label">Pyrgos Village<br>caldera view · golden hour</span>
+            </div>
+            <div class="ch-slide placeholder">
+              <span class="slot-icon">＋</span>
+              <span class="slot-label">Josh &amp; Danielle<br>volcanic stone · evening light</span>
+            </div>
+            <div class="ch-slide placeholder">
+              <span class="slot-icon">＋</span>
+              <span class="slot-label">The caldera below<br>one hour before the yes</span>
+            </div>
           </div>
-          <div class="photo-slot portrait">
-            <span class="slot-icon">＋</span>
-            <span class="slot-label">Josh &amp; Danielle<br>Pyrgos · volcanic stone · evening light</span>
+          <div class="ch-carousel-dots">
+            <span class="ch-dot active" data-idx="0"></span>
+            <span class="ch-dot" data-idx="1"></span>
+            <span class="ch-dot" data-idx="2"></span>
           </div>
-        </div>
-        <div class="media-row">
-          <div class="photo-slot landscape">
-            <span class="slot-icon">＋</span>
-            <span class="slot-label">The caldera below · Pyrgos Village · one hour before the yes</span>
-          </div>
+          <button class="ch-arrow ch-prev">&#8592;</button>
+          <button class="ch-arrow ch-next">&#8594;</button>
         </div>
       </div>
     </div>
@@ -1328,47 +1434,58 @@
         </p>
         <p class="story-copy">
           The cover story: a sunset photoshoot was planned.
-          Josh had also arranged dresses — choices waiting in the room, something elevated
-          to match the evening. She had no reason to question it.
+          Josh had also arranged dresses — choices waiting in the room,
+          something elevated to match the evening.
+          She had no reason to question it.
           It was exactly the kind of thing a trip like this called for.
         </p>
         <p class="story-copy">
           They were driven to Imerovigli — the quietest of the three caldera villages,
           perched at the highest point of the caldera rim. The photographer framed every shot.
           The afternoon light was exact. This was the first location. Pyrgos would follow.
-          She was photographed before the story changed permanently.
+          She was being photographed before the story changed permanently.
         </p>
         <p class="story-copy">
           What she didn't know: while she stood against Cycladic white-wash and blue dome,
-          a team was at work at <a href="https://venetsanoswinery.com/" target="_blank" rel="noopener" style="color:#c9a96e; text-decoration:none; border-bottom:1px solid rgba(201,169,110,.3);">Venetsanos Winery</a>. A large heart being assembled — pink florals,
-          her favourite. Built floor to edge, bloom by bloom. Around the full perimeter,
-          hundreds of candles and tealights being placed, one by one. A table set for the occasion.
-          Musicians warming up to play one song.
-          She was being photographed. He was watching the clock. The island was holding its breath.
+          a team was at work at <a href="https://venetsanoswinery.com/" target="_blank" rel="noopener" style="color:#c9a96e; text-decoration:none; border-bottom:1px solid rgba(201,169,110,.3);">Venetsanos Winery</a>.
+          A large heart of pink florals — her favourite — being assembled bloom by bloom.
+          Around the full perimeter, hundreds of candles and tealights placed one by one.
+          A table set for dinner. Musicians warming up for one song.
+        </p>
+        <p class="story-copy">
+          She was being photographed. He was watching the clock.
+          The island was holding its breath.
         </p>
         <ul class="story-detail">
           <li>Makeup artist at Canaves Oia Epitome · the photoshoot cover</li>
           <li>Dresses arranged and waiting · something chosen for the evening</li>
           <li>First photoshoot location · Imerovigli · highest caldera viewpoint · 17:45</li>
           <li>Second photoshoot location · Pyrgos Village · 18:30</li>
-          <li>Meanwhile: large heart of pink florals assembled at the venue</li>
+          <li>Meanwhile at Venetsanos: large heart of pink florals assembled</li>
           <li>Hundreds of candles and tealights placed across the full perimeter</li>
-          <li>Live musicians positioned · warming up to play Kygo "Unforgettable"</li>
+          <li>Live musicians positioned · Kygo "Unforgettable" · ready</li>
         </ul>
       </div>
       <div class="chronicle-media">
-        <div class="media-row">
-          <div class="photo-slot portrait has-img">
-            <img src="proposal%20photos/JoshandNicole-120.jpg" alt="Josh and Danielle · Imerovigli · caldera rim · evening photoshoot" loading="lazy">
+        <div class="ch-carousel" id="ch08Carousel">
+          <div class="ch-carousel-track">
+            <div class="ch-slide">
+              <img src="proposal%20photos/JoshandNicole-120.jpg" alt="Josh and Danielle · Imerovigli · caldera rim · evening photoshoot" loading="lazy">
+            </div>
+            <div class="ch-slide">
+              <img src="proposal%20photos/JoshandNicole-155.jpg" alt="Josh and Danielle · Santorini caldera rooftop · the photoshoot" loading="lazy">
+            </div>
+            <div class="ch-slide">
+              <img src="proposal%20photos/JoshandNicole-193.jpg" alt="Venetsanos Winery · mirrored aisle · chandelier · ready for the proposal" loading="lazy">
+            </div>
           </div>
-          <div class="photo-slot portrait has-img">
-            <img src="proposal%20photos/JoshandNicole-155.jpg" alt="Josh and Danielle · Santorini caldera rooftop · the photoshoot" loading="lazy">
+          <div class="ch-carousel-dots">
+            <span class="ch-dot active" data-idx="0"></span>
+            <span class="ch-dot" data-idx="1"></span>
+            <span class="ch-dot" data-idx="2"></span>
           </div>
-        </div>
-        <div class="media-row">
-          <div class="photo-slot landscape has-img">
-            <img src="proposal%20photos/JoshandNicole-193.jpg" alt="Venetsanos Winery · mirrored aisle · chandelier · ready for the proposal" loading="lazy">
-          </div>
+          <button class="ch-arrow ch-prev">&#8592;</button>
+          <button class="ch-arrow ch-next">&#8594;</button>
         </div>
       </div>
     </div>
@@ -1636,6 +1753,50 @@
     lb.addEventListener('click', e => { if (e.target !== lbImg) closeLb(); });
     document.getElementById('lb-close').addEventListener('click', closeLb);
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+
+
+    // 8. CHRONICLE CAROUSELS (universal init)
+    document.querySelectorAll('.ch-carousel').forEach(car => {
+      const track  = car.querySelector('.ch-carousel-track');
+      const slides = car.querySelectorAll('.ch-slide');
+      const dots   = car.querySelectorAll('.ch-dot');
+      const total  = slides.length;
+      if (!track || total < 2) return;
+
+      // Set dimensions
+      track.style.width = (total * 100) + '%';
+      slides.forEach(s => { s.style.width = (100 / total) + '%'; });
+
+      let cur = 0, timer;
+      const step = 100 / total;
+
+      function goTo(n) {
+        cur = (n + total) % total;
+        track.style.transform = `translateX(-${cur * step}%)`;
+        dots.forEach((d, i) => d.classList.toggle('active', i === cur));
+      }
+
+      function next() { goTo(cur + 1); }
+      function startAuto() { timer = setInterval(next, 4500); }
+      function resetAuto() { clearInterval(timer); startAuto(); }
+
+      const prevBtn = car.querySelector('.ch-prev');
+      const nextBtn = car.querySelector('.ch-next');
+      if (prevBtn) prevBtn.addEventListener('click', () => { goTo(cur - 1); resetAuto(); });
+      if (nextBtn) nextBtn.addEventListener('click', () => { next(); resetAuto(); });
+      dots.forEach(d => d.addEventListener('click', () => { goTo(+d.dataset.idx); resetAuto(); }));
+
+      // Also wire up lightbox for image slides
+      slides.forEach(slide => {
+        const img = slide.querySelector('img');
+        if (img) {
+          slide.style.cursor = 'zoom-in';
+          slide.addEventListener('click', () => openLb(img.src, img.alt));
+        }
+      });
+
+      startAuto();
+    });
 
   </script>
 </body>
