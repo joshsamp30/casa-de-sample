@@ -169,7 +169,7 @@
 
     /* ─── CHAPTER BAND ───────────────────────────────────────── */
     .chapter-band {
-      display: flex; align-items: flex-end; gap: 0; padding: 80px 80px 0;
+      display: flex; align-items: flex-end; gap: 0; padding: 72px 80px 0;
     }
     .chapter-num-bg {
       font-family: 'Bebas Neue', sans-serif;
@@ -192,18 +192,23 @@
 
     /* ─── CHRONICLE BODY ─────────────────────────────────────── */
     .chronicle-body {
-      display: grid; grid-template-columns: 1fr 1.35fr; gap: 44px;
-      padding: 36px 80px 52px; align-items: start;
+      display: block;
+      padding: 40px 0 56px;
     }
-    .chronicle-body.flip .chronicle-media { order: -1; }
+    .chronicle-body.flip .chronicle-media { order: 0; }
     .chronicle-text {
-      padding-right: 44px; border-right: 1px solid rgba(201,169,110,.14);
-      position: sticky; top: 80px;
+      max-width: 660px;
+      margin: 0 auto 44px;
+      padding: 0 80px;
+      border: none;
+      position: static;
     }
     .chronicle-body.flip .chronicle-text {
-      padding-right: 0; padding-left: 44px; border-right: none;
-      border-left: 1px solid rgba(201,169,110,.14);
-      position: sticky; top: 80px;
+      max-width: 660px;
+      margin: 0 auto 44px;
+      padding: 0 80px;
+      border: none;
+      position: static;
     }
 
     .story-copy {
@@ -219,8 +224,12 @@
     .story-detail li::before { content: '— '; color: #c9a96e; }
 
     /* ─── MEDIA SLOTS ────────────────────────────────────────── */
-    .chronicle-media { display: flex; flex-direction: column; gap: 4px; }
-    .media-row { display: flex; gap: 4px; }
+    .chronicle-media {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+    }
+    .media-row { display: contents; }
     .photo-slot {
       background: #e8e2d9; border: 1px dashed rgba(201,169,110,.4);
       display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -237,9 +246,9 @@
       letter-spacing: .3em; text-transform: uppercase; color: rgba(201,169,110,.55);
       text-align: center; padding: 0 14px; line-height: 1.8;
     }
+    .photo-slot.landscape { aspect-ratio: 16/9; grid-column: 1 / -1; }
     .photo-slot.tall { aspect-ratio: 2/3; }
     .photo-slot.portrait { aspect-ratio: 3/4; }
-    .photo-slot.landscape { aspect-ratio: 3/2; }
     .photo-slot.square { aspect-ratio: 1; }
 
     .video-slot {
@@ -269,8 +278,8 @@
     /* ─── SECTION DIVIDER ────────────────────────────────────── */
     .section-divider {
       height: 1px;
-      background: linear-gradient(to right, transparent, rgba(201,169,110,.25) 20%, rgba(201,169,110,.45) 50%, rgba(201,169,110,.25) 80%, transparent);
-      margin: 0 80px;
+      background: linear-gradient(to right, transparent 2%, rgba(201,169,110,.25) 20%, rgba(201,169,110,.45) 50%, rgba(201,169,110,.25) 80%, transparent 98%);
+      margin: 0;
     }
 
     /* ─── FULL-BLEED ─────────────────────────────────────────── */
@@ -441,11 +450,17 @@
       letter-spacing: .3em; text-transform: uppercase; color: rgba(100,80,50,.5);
       text-align: center; padding-top: 10px;
     }
+    /* Videos sit inside the photo grid */
+    .chronicle-media .ig-player-wrap {
+      grid-column: 1 / 2; /* single video: left column */
+      margin-top: 0;
+    }
     /* Two videos side by side */
     .video-pair {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 4px;
+      grid-column: 1 / -1;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 0;
     }
-    .video-pair .ig-player-wrap { margin-top: 0; }
+    .video-pair .ig-player-wrap { grid-column: auto; }
 
     /* ─── LIGHTBOX ───────────────────────────────────────────── */
     #lightbox { -webkit-backdrop-filter: blur(8px); }
@@ -456,14 +471,15 @@
 
     /* ─── MOBILE ─────────────────────────────────────────────── */
     @media (max-width: 900px) {
-      .chapter-band { padding: 60px 32px 0; }
+      .chapter-band { padding: 52px 28px 0; }
       .chapter-num-bg { font-size: 80px; }
-      .chronicle-body { grid-template-columns: 1fr; gap: 36px; padding: 36px 32px 64px; }
-      .chronicle-body.flip .chronicle-media { order: 0; }
-      .chronicle-text { padding-right: 0 !important; padding-left: 0 !important; border-right: none !important; border-left: none !important; position: static !important; }
+      .chronicle-body { padding: 32px 0 52px; }
+      .chronicle-media { grid-template-columns: 1fr; }
+      .photo-slot.landscape { aspect-ratio: 4/3; grid-column: 1; }
+      .chronicle-text { padding: 0 28px !important; }
       .video-pair { grid-template-columns: 1fr 1fr; }
       .section-divider { margin: 0 32px; }
-      .arrival-band { grid-template-columns: 1fr; gap: 36px; padding: 0 32px 72px; }
+      .arrival-band { grid-template-columns: 1fr; padding: 0 28px 60px; }
       .moment-section { padding: 72px 32px; }
       .moment-grid { grid-template-columns: 1fr 1fr; gap: 4px; }
       .moment-grid .photo-slot:nth-child(3) { display: none; }
@@ -482,8 +498,8 @@
       .editorial-title { font-size: clamp(64px, 18vw, 110px); }
       .hero-datestamp { display: none; }
       .dark-intro { padding: 80px 28px 60px; }
-      .chapter-band { padding: 52px 24px 0; }
-      .chronicle-body { padding: 32px 24px 60px; }
+      .chapter-band { padding: 44px 20px 0; }
+      .chronicle-body { padding: 28px 0 48px; }
       .section-divider { margin: 0 24px; }
       .moment-section { padding: 64px 24px; }
       .moment-grid { grid-template-columns: 1fr; }
