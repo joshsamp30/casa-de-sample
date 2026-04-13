@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ibiza — Casa De Sample</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #fef9f0;
+      --warm-white: #fffcf5;
+      --sand: #e8d5b0;
+      --terracotta: #c8703a;
+      --ocean: #4a8fa8;
+      --ink: #1c130a;
+      --mid: #6b5d50;
+      --light-mid: #a89880;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ────────────────────────────────────────────── */
+    .site-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(254,249,240,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(200,180,150,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 56px;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--terracotta); }
+    .nav-links a.active { color: var(--terracotta); }
+
+    /* ── HERO ───────────────────────────────────────────── */
+    .hero {
+      margin-top: 56px;
+      width: 100%;
+      height: 92vh;
+      min-height: 560px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 35%;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(254,249,240,0.08) 0%,
+        rgba(254,249,240,0) 40%,
+        rgba(254,249,240,0.55) 80%,
+        rgba(254,249,240,1) 100%
+      );
+    }
+    .hero-text {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 60px 60px 48px;
+      text-align: center;
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 10px;
+    }
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(80px, 18vw, 200px);
+      letter-spacing: 0.04em;
+      line-height: 0.85;
+      color: var(--ink);
+    }
+    .hero-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--mid);
+      margin-top: 14px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── STORY SECTIONS ─────────────────────────────────── */
+    .story-section {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 80px 40px 40px;
+    }
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      gap: 24px;
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(200,180,150,0.35);
+    }
+    .section-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      color: var(--terracotta);
+      margin-bottom: 6px;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 6vw, 72px);
+      letter-spacing: 0.04em;
+      line-height: 1;
+      color: var(--ink);
+    }
+    .section-story {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--mid);
+      line-height: 1.7;
+      max-width: 480px;
+      margin-left: auto;
+      text-align: right;
+    }
+    .section-header-left { flex: 1; }
+    .section-header-right { flex: 1; }
+
+    /* ── PHOTO GRID ─────────────────────────────────────── */
+    .photo-grid {
+      column-count: 4;
+      column-gap: 10px;
+      margin-top: 0;
+    }
+    .photo-item {
+      break-inside: avoid;
+      margin-bottom: 10px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+    .photo-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.4s ease, filter 0.4s ease;
+      border-radius: 4px;
+    }
+    .photo-item:hover img {
+      transform: scale(1.03);
+      filter: brightness(1.04);
+    }
+
+    /* Small grids for intro sections */
+    .photo-grid-3 { column-count: 3; column-gap: 10px; }
+    .photo-grid-2 { column-count: 2; column-gap: 10px; }
+
+    /* ── SCENE DIVIDER ──────────────────────────────────── */
+    .scene-divider {
+      max-width: 1240px;
+      margin: 20px auto 0;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .scene-divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--sand), transparent);
+    }
+    .scene-divider-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--light-mid);
+    }
+
+    /* ── FULL-WIDTH BAND ────────────────────────────────── */
+    .full-band {
+      width: 100%;
+      height: 50vh;
+      min-height: 280px;
+      overflow: hidden;
+      position: relative;
+      margin: 60px 0 0;
+    }
+    .full-band img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+    }
+    .full-band-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 40px 60px;
+      background: linear-gradient(transparent, rgba(254,249,240,0.9));
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 20px;
+      color: var(--mid);
+      text-align: center;
+    }
+
+    /* ── FOOTER ─────────────────────────────────────────── */
+    .footer {
+      margin-top: 100px;
+      padding: 50px 40px;
+      background: var(--ink);
+      text-align: center;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      color: var(--cream);
+      display: block;
+      margin-bottom: 24px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      list-style: none;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(254,249,240,0.5);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--cream); }
+    .footer-copy {
+      font-size: 11px;
+      color: rgba(254,249,240,0.3);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── LIGHTBOX ───────────────────────────────────────── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(28,19,10,0.95);
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-img-wrap {
+      position: relative;
+      max-width: 90vw;
+      max-height: 92vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox-img-wrap img {
+      max-width: 90vw;
+      max-height: 88vh;
+      object-fit: contain;
+      border-radius: 3px;
+    }
+    .lb-btn {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(254,249,240,0.12);
+      border: none;
+      color: var(--cream);
+      width: 48px;
+      height: 64px;
+      font-size: 22px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.2s;
+      z-index: 1001;
+    }
+    .lb-btn:hover { background: rgba(254,249,240,0.22); }
+    .lb-prev { left: 16px; }
+    .lb-next { right: 16px; }
+    .lb-close {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: rgba(254,249,240,0.7);
+      font-size: 28px;
+      cursor: pointer;
+      z-index: 1001;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background 0.2s;
+    }
+    .lb-close:hover { background: rgba(254,249,240,0.1); }
+    .lb-counter {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      color: rgba(254,249,240,0.5);
+    }
+
+    /* ── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .photo-grid { column-count: 3; }
+      .section-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .section-story { text-align: left; max-width: 100%; }
+    }
+    @media (max-width: 768px) {
+      .site-nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero-text { padding: 40px 24px 40px; }
+      .story-section { padding: 60px 20px 30px; }
+      .photo-grid { column-count: 2; }
+      .photo-grid-3 { column-count: 2; }
+      .scene-divider { padding: 0 20px; }
+      .full-band-caption { padding: 28px 24px; font-size: 17px; }
+    }
+    @media (max-width: 480px) {
+      .photo-grid { column-count: 2; }
+      .photo-grid-3 { column-count: 2; }
+      .photo-grid-2 { column-count: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <a href="index.html" class="nav-logo">Casa De Sample</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="gallery.html">All Albums</a></li>
+    <li><a href="proposal.html">The Proposal</a></li>
+    <li><a href="gallery-proposal.html">Proposal Photos</a></li>
+    <li><a href="ibiza.html" class="active">Ibiza</a></li>
+    <li><a href="#">Wedding</a></li>
+    <li><a href="#">Baby</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <img
+    class="hero-img"
+    src="IBIZA/IMG_0371.jpeg"
+    alt="Ibiza — crystal water, Formentera"
+    loading="eager"
+  />
+  <div class="hero-overlay"></div>
+  <div class="hero-text">
+    <p class="hero-eyebrow">Summer 2022</p>
+    <h1 class="hero-title">IBIZA</h1>
+    <p class="hero-sub">Friends, sun, and the best eight hours on the water.</p>
+  </div>
+</section>
+
+<!-- SECTION 1: WHEELS UP -->
+<section class="story-section">
+  <div class="section-header">
+    <div class="section-header-left">
+      <p class="section-num">01</p>
+      <h2 class="section-title">WHEELS UP</h2>
+    </div>
+    <div class="section-header-right">
+      <p class="section-story">Two suitcases, one group chat, and the next flight out. No itinerary. No agenda. Just Ibiza.</p>
+    </div>
+  </div>
+  <div class="photo-grid photo-grid-3" id="grid-arrival"></div>
+</section>
+
+<div class="scene-divider">
+  <div class="scene-divider-line"></div>
+  <span class="scene-divider-label">Ibiza, Spain</span>
+  <div class="scene-divider-line"></div>
+</div>
+
+<!-- SECTION 2: NIKI BEACH -->
+<section class="story-section">
+  <div class="section-header">
+    <div class="section-header-left">
+      <p class="section-num">02</p>
+      <h2 class="section-title">NIKI BEACH</h2>
+    </div>
+    <div class="section-header-right">
+      <p class="section-story">White sunbeds, rosé by the litre, music that started before noon. Nobody checked the time once.</p>
+    </div>
+  </div>
+  <div class="photo-grid" id="grid-niki"></div>
+</section>
+
+<!-- FULL-WIDTH BAND -->
+<div class="full-band">
+  <img src="IBIZA/IMG_5679.jpeg" alt="Niki Beach — golden hour" loading="lazy" />
+  <p class="full-band-caption">Every beach club should look this good at sunset.</p>
+</div>
+
+<div class="scene-divider">
+  <div class="scene-divider-line"></div>
+  <span class="scene-divider-label">Be there by 8pm</span>
+  <div class="scene-divider-line"></div>
+</div>
+
+<!-- SECTION 3: SWEDISH HOUSE MAFIA -->
+<section class="story-section">
+  <div class="section-header">
+    <div class="section-header-left">
+      <p class="section-num">03</p>
+      <h2 class="section-title">SWEDISH HOUSE MAFIA</h2>
+    </div>
+    <div class="section-header-right">
+      <p class="section-story">Be there by 8. Ends at midnight. Ushuaïa open air. That's all the planning we needed.</p>
+    </div>
+  </div>
+  <div class="photo-grid" id="grid-shm"></div>
+</section>
+
+<!-- FULL-WIDTH BAND -->
+<div class="full-band">
+  <img src="IBIZA/IMG_2551.jpeg" alt="Ushuaïa — Swedish House Mafia" loading="lazy" />
+  <p class="full-band-caption">Ushuaïa. Open air. Four thousand people. One of those nights.</p>
+</div>
+
+<div class="scene-divider">
+  <div class="scene-divider-line"></div>
+  <span class="scene-divider-label">8 hours on the water</span>
+  <div class="scene-divider-line"></div>
+</div>
+
+<!-- SECTION 4: THE BOAT -->
+<section class="story-section">
+  <div class="section-header">
+    <div class="section-header-left">
+      <p class="section-num">04</p>
+      <h2 class="section-title">THE LONG WAY TO FORMENTERA</h2>
+    </div>
+    <div class="section-header-right">
+      <p class="section-story">Eight hours. Open water. The kind of blue you don't believe until you're swimming in it. We made it to Formentera before the sun went down.</p>
+    </div>
+  </div>
+  <div class="photo-grid" id="grid-boat"></div>
+</section>
+
+<!-- FULL-WIDTH BAND -->
+<div class="full-band">
+  <img src="IBIZA/IMG_0373.jpeg" alt="Formentera — clear water" loading="lazy" />
+  <p class="full-band-caption">Formentera. They say the water is the clearest in Europe. They're right.</p>
+</div>
+
+<div class="scene-divider">
+  <div class="scene-divider-line"></div>
+  <span class="scene-divider-label">Bella's Beach House</span>
+  <div class="scene-divider-line"></div>
+</div>
+
+<!-- SECTION 5: BELLA'S -->
+<section class="story-section">
+  <div class="section-header">
+    <div class="section-header-left">
+      <p class="section-num">05</p>
+      <h2 class="section-title">BELLA'S PLACE</h2>
+    </div>
+    <div class="section-header-right">
+      <p class="section-story">The last day. Bella's beach house somewhere between the cliffs and the sea. Slow mornings, cold drinks, nowhere to be.</p>
+    </div>
+  </div>
+  <div class="photo-grid" id="grid-bella"></div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <a href="index.html" class="footer-logo">Casa De Sample</a>
+  <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="gallery.html">All Albums</a></li>
+    <li><a href="proposal.html">The Proposal</a></li>
+    <li><a href="gallery-proposal.html">Proposal Photos</a></li>
+    <li><a href="ibiza.html">Ibiza</a></li>
+  </ul>
+  <p class="footer-copy">Casa De Sample &mdash; A life in chapters.</p>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose">&times;</button>
+  <button class="lb-btn lb-prev" id="lbPrev">&#8592;</button>
+  <div class="lightbox-img-wrap">
+    <img id="lbImg" src="" alt="" />
+  </div>
+  <button class="lb-btn lb-next" id="lbNext">&#8594;</button>
+  <div class="lb-counter" id="lbCounter"></div>
+</div>
+
+<script>
+  // ── Photo data ─────────────────────────────────────────
+  const BASE = 'IBIZA/';
+
+  const sections = {
+    arrival: [
+      'IMG_0301.jpeg','IMG_0303.jpeg','IMG_0304.jpeg','IMG_0305.jpeg',
+      'IMG_0319.jpeg','IMG_0320.jpeg','IMG_0165.JPG','IMG_0813.jpeg',
+      'IMG_1127.jpeg','IMG_1420.jpeg','IMG_1601.jpeg'
+    ],
+    niki: [
+      'IMG_5575.JPG','IMG_5674.jpeg','IMG_5675.jpeg','IMG_5678.jpeg',
+      'IMG_5679.jpeg','IMG_5680.jpeg','IMG_5681.jpeg','IMG_5682.jpeg',
+      'IMG_5759.jpeg','IMG_7113.jpeg','IMG_7219.jpeg','IMG_7230.jpeg',
+      'IMG_8412.jpeg','IMG_8460.jpeg','IMG_8462.jpeg',
+      '0988785D-3322-4EAF-8E4B-956E0AB0D5F5.jpg',
+      '10c6b530-aa78-4dd3-ae6d-d3a82ec0963d.jpg',
+      '142B7978-AB97-4603-A98E-1E55424BC11F.jpg',
+      '1456D3F3-396B-47ED-801C-0C46D7E76E32.jpg',
+      '16754c76-41bf-4970-b458-d4e5841cf6de.jpg',
+      '1a7527f7-feef-4abe-80d6-ca1a48270c0f.jpg',
+      '1de1d6ef-156d-4d0c-bff0-ee6a1c7a124b.jpg',
+      '2123A297-727C-4849-8E39-5637CD2E1F56.jpg',
+      '26215f2a-60b4-45e2-ae2e-d92883019023.jpg',
+      '2FCF4724-12C8-4643-A965-7719F82549B5.jpg',
+      '2fa53ba8-25b3-437c-b3ee-6dad0d88a02a.jpg',
+      '314D70ED-39C1-48F3-A3BF-54986498BD21.jpg',
+      '3BF55642-E9C8-433B-8A28-9D188C10E0D2.jpg',
+      '3C1B1D51-CB18-4180-9757-92E6116358F1.jpg',
+      '3D51BCFC-A752-42A5-8B0E-C75A0FDD3E7A.jpg'
+    ],
+    shm: [
+      'IMG_0321.jpeg','IMG_0322.jpeg','IMG_0327.jpeg','IMG_0329.jpeg',
+      'IMG_0330.jpeg','IMG_0331.jpeg','IMG_0334.jpeg','IMG_0336.jpeg',
+      'IMG_0337.jpeg','IMG_0338.jpeg','IMG_0429.jpeg','IMG_0430.jpeg',
+      'IMG_0431.jpeg','IMG_0432.jpeg','IMG_0433.jpeg',
+      'IMG_2507.jpeg','IMG_2508.jpeg','IMG_2527.jpeg','IMG_2533.jpeg',
+      'IMG_2551.jpeg','IMG_2552.jpeg','IMG_2553.jpeg','IMG_2557.jpeg',
+      'IMG_2564.jpeg','IMG_2567.jpeg','IMG_2571.jpeg','IMG_2579.jpeg',
+      'IMG_2588.jpeg','IMG_2589.jpeg','IMG_2590.jpeg',
+      '67964627914__F9283092-764F-49B0-9538-2DD07957E81E.jpeg',
+      '67977517494__060CB558-F0D0-408E-B1CD-FC0155535F26.fullsizerender.jpeg',
+      '67987848716__33505F96-74DA-47FE-B000-B172B3524902.jpeg',
+      '67988353749__5EF2C0F0-FFA1-40B4-882E-CDCCED9C61B4.jpeg',
+      '67988355284__9500635D-7401-400B-8285-1EBA227BE0FA.jpeg',
+      '67988447022__2B0A8ECA-E2FB-4060-9D50-B4ABE3BA3D69.jpeg',
+      '67988573095__210F5629-1B9B-4939-8336-E198112AD05A.jpeg',
+      '432d8a4c-b67c-4a1d-8ce6-53c2b4dfbfc3.jpg',
+      '44525e3d-8e64-431b-bfdd-2dd6c52d4db5.jpg',
+      '45b296b6-60f7-40eb-ad6c-f974d1734e6d.jpg',
+      '49f45325-7e55-44ef-a30a-79fba1a5ed8f.jpg',
+      '4bcafb66-8dee-47c3-ab7e-1df40b7e55fc.jpg',
+      '4c5c96a4-1ae3-46c3-800b-54b0abf8174c.jpg',
+      '51be4120-e562-4da5-94f6-3e71dc76c61a.jpg',
+      '52475123-8EAA-46EC-89D9-9C76E5EDB81C.jpg',
+      '53e58adb-d43f-41f9-9a58-a28980db2050.jpg'
+    ],
+    boat: [
+      'IMG_0371.jpeg','IMG_0372.jpeg','IMG_0373.jpeg','IMG_0374.jpeg',
+      'IMG_0375.jpeg','IMG_0376.jpeg','IMG_0382.jpeg','IMG_0388.jpeg',
+      'IMG_0389.jpeg','IMG_0390.jpeg',
+      'IMG_2593.jpeg','IMG_2594.jpeg','IMG_2599.jpg','IMG_2604.jpeg',
+      'IMG_2608.jpeg','IMG_2677.jpeg','IMG_2678.jpeg','IMG_2679.jpeg',
+      'IMG_2725.jpeg','IMG_2730.jpeg','IMG_2731.jpeg','IMG_2732.jpeg',
+      '67984604510__A9B7E547-B083-4B16-A061-50DF8C5C37D8.jpeg',
+      '67976112695__D0223416-2EF2-4071-928D-A32A58968BF0.jpeg',
+      '67973596551__DF3D03C4-68BB-4343-BC39-4CDC886391D9.fullsizerender.jpeg',
+      '584c22b9-0def-4d7b-855d-24b0704e1472.jpg',
+      '5eda65b3-16f5-44cd-8084-7a5181f8bade.jpg',
+      '6151beab-1c61-44ed-9aa5-61484ec8d4d3.jpg',
+      '62BBC921-16C3-4F55-9A73-0CBBDB9B9A81.jpg',
+      '6CDDF4E7-C069-4758-9CE1-E539108D81E8.jpg',
+      '6df61b61-e938-4deb-a8b9-3fe741fa82e3.jpg'
+    ],
+    bella: [
+      '70d0b25c-7580-42d5-a391-4ffc71f1dbb8.jpg',
+      '7112133a-c58a-4f9a-9378-5505100d8f00.jpg',
+      '73b7975f-de77-4071-82b9-3dcbefe54033.jpg',
+      '764DBF25-7A66-4671-9C30-62741D5C0119.jpg',
+      '7804BD57-75A6-46AA-9177-56EE926AA567.jpg',
+      '78198a17-a57c-4131-99db-f6b21703f113.jpg',
+      '7b76b883-f908-480b-be59-2725cbb7cddd.jpg',
+      '8276ede6-b5a7-4207-b365-fa84843e8c81.jpg',
+      '8320dd68-2d49-4afa-8487-e9016b7fe058.jpg',
+      '83a4afe3-688f-4720-a280-dd0f23221e66.jpg',
+      '86c7f8ea-6ce0-46c5-a75a-a297ced48f61.jpg',
+      '884f544f-9c34-471d-8a0b-3037c2abf22d.jpg',
+      '8c5c03b9-739c-42e9-98c0-3cdb9935b919.jpg',
+      '8d24cb84-71ae-4cb5-818b-2327b98831c1.jpg',
+      '96b68d0f-4f4e-431e-9cd5-2583044d74e8.jpg',
+      '9AB106F2-4CB8-4131-9EDD-A68BC028ECD3.jpg',
+      '9d0e92e3-32f8-4a99-827f-b6eba64f28df.jpg',
+      'C1CC5DF4-FC58-470B-9D76-BCD3E21EF554.jpg',
+      'CA92786E-216B-4E27-9452-8249CE0F6AE7.jpg',
+      'D1BDF11D-AEF2-477C-A7F7-986F2761FB54.jpg',
+      'F557FB36-5A38-4D00-BC3F-27D44D782B03.jpg',
+      'F5BB03D8-BF9C-4455-A149-4CE1B53DC4E8.jpg',
+      'FAC73D14-2BBF-4463-BD33-D124CB54921E.jpg',
+      'a2e01aa1-c752-44fe-b9e6-5b72286d3fed.jpg',
+      'ba9e05a9-8654-4d98-9a7f-7f477c351fc3.jpg',
+      'bde5bcb5-7442-47de-956b-5f4bb78cde6f.jpg',
+      'c6638eb1-d06a-4e25-b019-3ddd207dc9a0.jpg',
+      'c986c7ac-f2ab-4238-9bc2-caeb21ae5fdf.jpg',
+      'cb79932f-5cc4-403c-88b7-57f8d55ccfb3.jpg',
+      'cc1c8370-a7cc-41fd-b3ef-f403a6092ed6.jpg',
+      'cdfb7ae6-8182-45ef-bf78-e7739de6998f.jpg',
+      'ced95e18-9235-4f15-9909-e666a064296f.jpg',
+      'd08894ae-4471-48b7-bf85-f3fd179bcb99.jpg',
+      'd5d02711-ae20-4f36-9522-2029afadb19d.jpg',
+      'd6dc685b-2e37-4d6c-bc6f-bb4a32d57783.jpg',
+      'daea1432-b763-40d6-9ec5-e6624b0a6ef0.jpg',
+      'efb2dc79-a9ef-4362-bb61-5ada3303a8ee.jpg',
+      'f00e3377-acb8-4000-97e6-3403b39308e8.jpg',
+      'f7f3ff15-f204-484a-9b03-bd24f4be7cf7.jpg',
+      'f98943d8-f88f-490e-8e74-e08982810d5a.jpg',
+      'fa28afb8-53cb-4c6c-af30-f185c98f56ab.jpg',
+      'fbeca104-c499-4f24-8f62-51f6e67ca12e.jpg',
+      'imagejpeg_0.jpg','imagejpeg_2.jpg'
+    ]
+  };
+
+  // Build a flat array for lightbox navigation
+  let allPhotos = [];
+  let currentLbIdx = 0;
+
+  function buildGrid(gridId, photos, sectionKey) {
+    const grid = document.getElementById(gridId);
+    if (!grid) return;
+    photos.forEach((filename, i) => {
+      const startGlobal = allPhotos.length;
+      const item = document.createElement('div');
+      item.className = 'photo-item';
+      item.dataset.idx = startGlobal + i;
+      const img = document.createElement('img');
+      img.src = BASE + filename;
+      img.alt = 'Ibiza photo';
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.addEventListener('error', () => { item.style.display = 'none'; });
+      item.appendChild(img);
+      item.addEventListener('click', () => openLightbox(parseInt(item.dataset.idx)));
+      grid.appendChild(item);
+    });
+    // Push to allPhotos
+    photos.forEach(f => allPhotos.push(BASE + f));
+  }
+
+  // Build all grids - photo global indices must be built in order
+  // We pre-calculate offsets
+  const offsets = {};
+  let runningIdx = 0;
+  ['arrival','niki','shm','boat','bella'].forEach(key => {
+    offsets[key] = runningIdx;
+    runningIdx += sections[key].length;
+  });
+
+  // Rebuild with correct indices
+  function buildAllGrids() {
+    allPhotos = [];
+    ['arrival','niki','shm','boat','bella'].forEach(key => {
+      const gridId = 'grid-' + (key === 'arrival' ? 'arrival' : key === 'niki' ? 'niki' : key === 'shm' ? 'shm' : key === 'boat' ? 'boat' : 'bella');
+      const grid = document.getElementById(gridId);
+      if (!grid) return;
+      sections[key].forEach((filename, i) => {
+        const globalIdx = allPhotos.length;
+        const item = document.createElement('div');
+        item.className = 'photo-item';
+        const img = document.createElement('img');
+        const src = BASE + filename;
+        img.src = src;
+        img.alt = 'Ibiza photo';
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        img.addEventListener('error', () => { item.style.display = 'none'; });
+        item.appendChild(img);
+        item.addEventListener('click', () => openLightbox(globalIdx));
+        grid.appendChild(item);
+        allPhotos.push(src);
+      });
+    });
+  }
+
+  buildAllGrids();
+
+  // ── Lightbox ───────────────────────────────────────────
+  const lightbox = document.getElementById('lightbox');
+  const lbImg    = document.getElementById('lbImg');
+  const lbCounter = document.getElementById('lbCounter');
+
+  function openLightbox(idx) {
+    currentLbIdx = idx;
+    lbImg.src = allPhotos[currentLbIdx];
+    lbCounter.textContent = (currentLbIdx + 1) + ' / ' + allPhotos.length;
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function lbNav(dir) {
+    currentLbIdx = (currentLbIdx + dir + allPhotos.length) % allPhotos.length;
+    lbImg.src = allPhotos[currentLbIdx];
+    lbCounter.textContent = (currentLbIdx + 1) + ' / ' + allPhotos.length;
+  }
+
+  document.getElementById('lbClose').addEventListener('click', closeLightbox);
+  document.getElementById('lbPrev').addEventListener('click', () => lbNav(-1));
+  document.getElementById('lbNext').addEventListener('click', () => lbNav(1));
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+  document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'ArrowLeft')  lbNav(-1);
+    if (e.key === 'ArrowRight') lbNav(1);
+    if (e.key === 'Escape')     closeLightbox();
+  });
+
+  // Touch swipe for lightbox
+  let touchStartX = 0;
+  lightbox.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  lightbox.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 40) lbNav(dx < 0 ? 1 : -1);
+  });
+</script>
+
+</body>
+</html>
