@@ -56,31 +56,12 @@
       position: relative; width: 100vw; height: 100vh;
       min-height: 600px; overflow: hidden; background: #0a0a0a;
     }
-    /* Blurred backdrop — fills widescreen sides on desktop */
-    .editorial-video-bg {
-      display: none;
-      position: absolute; inset: -5%; width: 110%; height: 110%;
-      object-fit: cover; object-position: center;
-      filter: blur(22px) brightness(.28) saturate(.5);
-    }
-    /* Main video — portrait, centered by height, never scaled up */
     .editorial-video {
-      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-      height: 100%; width: auto;
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
       opacity: 0; transition: opacity 1.4s ease;
     }
-    /* Mobile — fill the whole screen normally */
-    @media (max-width: 759px) {
-      .editorial-video {
-        left: 0; transform: none; width: 100%; height: 100%; object-fit: cover;
-      }
-    }
-    /* Desktop — show backdrop fill */
-    @media (min-width: 760px) {
-      .editorial-video-bg { display: block; }
-    }
     .editorial-hero.loaded .editorial-video { opacity: 1; }
-    .editorial-hero.loaded .editorial-video-bg { opacity: 1; }
     .editorial-overlay {
       position: absolute; inset: 0; z-index: 1;
       background:
@@ -760,9 +741,6 @@
        EDITORIAL HERO
   ══════════════════════════════════════════════════════════ -->
   <section class="editorial-hero" id="editorialHero">
-    <video class="editorial-video-bg" autoplay muted loop playsinline preload="none">
-      <source src="videos/panel2_proposal.mp4" type="video/mp4" />
-    </video>
     <video class="editorial-video" id="heroVideo" autoplay muted loop playsinline preload="auto">
       <source src="videos/panel2_proposal.mp4" type="video/mp4" />
     </video>
