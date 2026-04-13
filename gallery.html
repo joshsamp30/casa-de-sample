@@ -53,7 +53,7 @@
 
     /* ─── HERO ───────────────────────────────────────────────── */
     .albums-hero {
-      padding: 160px 80px 80px;
+      padding: 152px 80px 72px;
       text-align: center;
     }
     .albums-eyebrow {
@@ -63,129 +63,140 @@
     }
     .albums-title {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(72px, 12vw, 160px); letter-spacing: .04em; color: #fff;
-      line-height: 0.88; margin-bottom: 24px;
+      font-size: clamp(64px, 11vw, 148px); letter-spacing: .04em; color: #fff;
+      line-height: 0.88; margin-bottom: 22px;
     }
     .albums-sub {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(16px, 2vw, 22px); font-style: italic; font-weight: 300;
-      color: rgba(255,255,255,.35); max-width: 520px; margin: 0 auto;
+      font-size: clamp(16px, 1.9vw, 22px); font-style: italic; font-weight: 300;
+      color: rgba(255,255,255,.35); max-width: 480px; margin: 0 auto;
     }
     .gold-rule {
       width: 1px; height: 56px;
       background: linear-gradient(to bottom, transparent, #c9a96e, transparent);
-      margin: 52px auto 0;
+      margin: 48px auto 0;
     }
 
-    /* ─── ALBUMS GRID ────────────────────────────────────────── */
-    .albums-section {
-      padding: 72px 60px 100px;
-    }
-    .albums-grid {
+    /* ─── MILESTONE GRID ─────────────────────────────────────── */
+    .milestones {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 3px;
+      padding: 0;
     }
 
-    /* ─── ALBUM CARD ─────────────────────────────────────────── */
-    .album-card {
+    /* ─── MILESTONE CARD ─────────────────────────────────────── */
+    .milestone {
       position: relative;
-      aspect-ratio: 3/4;
+      aspect-ratio: 2/3;
+      min-height: 420px;
       overflow: hidden;
-      background: #111;
-      text-decoration: none;
+      background: #0d0d0d;
+      transform-style: preserve-3d;
+      will-change: transform;
+      transition: transform .6s cubic-bezier(.25,.46,.45,.94);
+    }
+    .milestone-bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      background-repeat: no-repeat;
+      transition: transform 1s cubic-bezier(.25,.46,.45,.94), filter .8s;
+      filter: brightness(.85);
+    }
+    .milestone:hover .milestone-bg { transform: scale(1.04); filter: brightness(.55); }
+    .milestone::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.88) 0%, rgba(0,0,0,.2) 48%, transparent 72%);
+      z-index: 1;
+    }
+    .milestone-info {
+      position: absolute; bottom: 44px; left: 40px; right: 40px; z-index: 2;
+      transition: transform .6s ease;
+    }
+    .milestone:hover .milestone-info { transform: translateZ(24px); }
+    .milestone-label {
+      font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 300;
+      letter-spacing: .42em; text-transform: uppercase;
+      color: rgba(255,255,255,.55); margin-bottom: 9px;
+    }
+    .milestone-date {
+      font-family: 'Montserrat', sans-serif; font-size: 8px; font-weight: 300;
+      letter-spacing: .3em; text-transform: uppercase;
+      color: #c9a96e; margin-bottom: 10px; display: block;
+    }
+    .milestone-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(34px, 3.4vw, 60px); letter-spacing: .05em; color: #fff;
+      line-height: 1; margin-bottom: 6px;
+    }
+    .milestone-location {
+      font-family: 'Cormorant Garamond', serif; font-size: 14px; font-style: italic;
+      font-weight: 300; color: rgba(255,255,255,.4); margin-bottom: 22px;
       display: block;
     }
-    .album-card-img {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform .8s cubic-bezier(.25,.46,.45,.94), opacity .4s ease;
-      opacity: 0;
+
+    /* ─── DUAL CTA ROW ───────────────────────────────────────── */
+    .milestone-ctas {
+      display: flex; align-items: center; gap: 0;
+      border-top: 1px solid rgba(255,255,255,.12);
+      padding-top: 18px; margin-top: 4px;
     }
-    .album-card-img.loaded { opacity: 1; }
-    .album-card:hover .album-card-img { transform: scale(1.05); }
-    .album-card-overlay {
-      position: absolute; inset: 0;
-      background:
-        linear-gradient(to top, rgba(0,0,0,.88) 0%, rgba(0,0,0,.3) 45%, rgba(0,0,0,.1) 100%);
-      transition: background .5s ease;
+    .cta-link {
+      font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 300;
+      letter-spacing: .26em; text-transform: uppercase;
+      color: rgba(255,255,255,.45); text-decoration: none;
+      display: inline-flex; align-items: center; gap: 7px;
+      transition: color .25s;
+      padding-right: 24px;
     }
-    .album-card:hover .album-card-overlay {
-      background:
-        linear-gradient(to top, rgba(0,0,0,.92) 0%, rgba(0,0,0,.4) 50%, rgba(0,0,0,.15) 100%);
+    .cta-link::after { content: '→'; font-size: 11px; transition: transform .25s; }
+    .milestone:hover .cta-link { color: rgba(255,255,255,.75); }
+    .milestone:hover .cta-link:hover { color: #fff; }
+    .milestone:hover .cta-link:hover::after { transform: translateX(4px); }
+    .cta-divider {
+      width: 1px; height: 18px;
+      background: rgba(255,255,255,.15);
+      margin-right: 24px; flex-shrink: 0;
     }
-    .album-card-body {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 36px 32px 32px;
-      z-index: 2;
-    }
-    .album-card-tag {
-      font-family: 'Montserrat', sans-serif; font-size: 8px; font-weight: 300;
-      letter-spacing: .45em; text-transform: uppercase; color: #c9a96e;
-      margin-bottom: 10px; display: block;
-    }
-    .album-card-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(28px, 3vw, 44px); letter-spacing: .04em; color: #fff;
-      line-height: 1; margin-bottom: 8px;
-    }
-    .album-card-sub {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 14px; font-style: italic; font-weight: 300;
-      color: rgba(255,255,255,.5); margin-bottom: 16px; line-height: 1.5;
-    }
-    .album-card-meta {
-      font-family: 'Montserrat', sans-serif; font-size: 8.5px; font-weight: 300;
-      letter-spacing: .2em; text-transform: uppercase;
-      color: rgba(255,255,255,.3);
-      display: flex; align-items: center; gap: 14px;
-    }
-    .album-card-meta span::before { content: '· '; color: rgba(201,169,110,.4); margin-right: 4px; }
-    .album-card-meta span:first-child::before { display: none; }
-    .album-card-arrow {
-      position: absolute; top: 28px; right: 28px; z-index: 3;
-      width: 36px; height: 36px; border: 1px solid rgba(255,255,255,.2);
-      border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      color: rgba(255,255,255,.5); font-size: 14px;
-      transition: border-color .3s, color .3s, background .3s;
-      opacity: 0; transform: translateY(-4px);
-      transition: opacity .3s, transform .3s, border-color .3s, color .3s;
-    }
-    .album-card:hover .album-card-arrow {
-      opacity: 1; transform: translateY(0);
-      border-color: rgba(201,169,110,.6); color: #c9a96e;
-    }
+    .cta-link.primary { color: #c9a96e; }
+    .milestone:hover .cta-link.primary { color: #d4b483; }
+    .milestone:hover .cta-link.primary:hover { color: #f0d49a; }
 
     /* ─── LOCKED CARD ────────────────────────────────────────── */
-    .album-card.locked { cursor: default; }
-    .album-card.locked .album-card-img { opacity: 0.35; filter: grayscale(0.6); }
-    .album-card.locked:hover .album-card-img { transform: none; }
-    .album-card.locked:hover .album-card-overlay { background: linear-gradient(to top, rgba(0,0,0,.88) 0%, rgba(0,0,0,.3) 45%, rgba(0,0,0,.1) 100%); }
-    .lock-badge {
-      position: absolute; top: 24px; left: 24px; z-index: 3;
-      font-family: 'Montserrat', sans-serif; font-size: 8px; font-weight: 300;
-      letter-spacing: .35em; text-transform: uppercase;
-      color: rgba(255,255,255,.35);
-      border: 1px solid rgba(255,255,255,.15);
-      padding: 6px 14px; border-radius: 2px;
+    .milestone.locked { cursor: default; }
+    .milestone.locked .milestone-bg { filter: brightness(.4) grayscale(.5); }
+    .milestone.locked:hover .milestone-bg { transform: none; filter: brightness(.4) grayscale(.5); }
+    .milestone.locked .milestone-title { color: rgba(255,255,255,.4); }
+    .milestone.locked .milestone-location { color: rgba(255,255,255,.2); }
+    .milestone.locked .milestone-label { color: rgba(255,255,255,.25); }
+    .milestone.locked .milestone-date { color: rgba(201,169,110,.3); }
+    .milestone.locked:hover .milestone-info { transform: none; }
+    .lock-tag {
+      position: absolute; top: 24px; left: 28px; z-index: 3;
+      font-family: 'Montserrat', sans-serif; font-size: 7.5px; font-weight: 300;
+      letter-spacing: .38em; text-transform: uppercase;
+      color: rgba(255,255,255,.3);
+      border: 1px solid rgba(255,255,255,.12);
+      padding: 5px 13px;
     }
-    .album-card.locked .album-card-tag { color: rgba(201,169,110,.45); }
-    .album-card.locked .album-card-title { color: rgba(255,255,255,.55); }
-    .album-card.locked .album-card-sub { color: rgba(255,255,255,.3); }
-
-    /* ─── SECTION LABEL ──────────────────────────────────────── */
-    .section-label {
+    .milestone.locked .milestone-ctas { border-top-color: rgba(255,255,255,.06); }
+    .locked-cta {
       font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 300;
-      letter-spacing: .45em; text-transform: uppercase; color: rgba(255,255,255,.25);
-      margin-bottom: 24px; display: block;
+      letter-spacing: .26em; text-transform: uppercase;
+      color: rgba(255,255,255,.2);
     }
+
+    /* ─── REVEAL ─────────────────────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .9s ease, transform .9s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* ─── FOOTER ─────────────────────────────────────────────── */
     footer {
       background: #0a0a0a; padding: 60px 48px;
       border-top: 1px solid rgba(201,169,110,.1);
       display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px;
+      margin-top: 3px;
     }
     .footer-name { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: .18em; color: #fff; }
     .footer-links { display: flex; gap: 32px; list-style: none; }
@@ -200,29 +211,22 @@
       color: rgba(255,255,255,.15); text-transform: uppercase; width: 100%;
     }
 
-    /* ─── REVEAL ─────────────────────────────────────────────── */
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s ease, transform .9s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
     /* ─── MOBILE ─────────────────────────────────────────────── */
     @media (max-width: 900px) {
-      .albums-grid { grid-template-columns: repeat(2, 1fr); }
-      .albums-section { padding: 56px 28px 80px; }
-      .albums-hero { padding: 130px 32px 60px; }
+      .milestones { grid-template-columns: 1fr 1fr; }
+      .milestone:last-child { grid-column: 1 / -1; aspect-ratio: 16/9; min-height: 320px; }
     }
     @media (max-width: 760px) {
       nav .desktop-links { display: none; }
       .hamburger { display: flex; }
       nav { padding: 22px 24px; }
-      .albums-hero { padding: 110px 24px 52px; }
-      .albums-section { padding: 48px 4px 64px; }
-      .albums-grid { grid-template-columns: 1fr 1fr; gap: 3px; }
-      .album-card-body { padding: 24px 18px 20px; }
-      .album-card-title { font-size: 26px; }
+      .albums-hero { padding: 110px 24px 56px; }
+      .milestone-info { bottom: 28px; left: 24px; right: 24px; }
     }
-    @media (max-width: 480px) {
-      .albums-grid { grid-template-columns: 1fr; }
-      .album-card { aspect-ratio: 4/3; }
+    @media (max-width: 500px) {
+      .milestones { grid-template-columns: 1fr; }
+      .milestone { aspect-ratio: 3/4; min-height: 360px; }
+      .milestone:last-child { grid-column: auto; aspect-ratio: 3/4; }
     }
 
   </style>
@@ -254,107 +258,69 @@
 </div>
 
 <!-- ─── HERO ─────────────────────────────────────────────────── -->
-<div class="albums-hero">
-  <span class="albums-eyebrow">Casa De Sample &nbsp;·&nbsp; Every Milestone</span>
+<div class="albums-hero reveal">
+  <span class="albums-eyebrow">Casa De Sample &nbsp;·&nbsp; Every Chapter</span>
   <h1 class="albums-title">The Albums</h1>
-  <p class="albums-sub">Every chapter. Every celebration. Preserved with intention.</p>
+  <p class="albums-sub">Every milestone. Every memory. Preserved with intention.</p>
   <div class="gold-rule"></div>
 </div>
 
-<!-- ─── ALBUMS ───────────────────────────────────────────────── -->
-<div class="albums-section">
+<!-- ─── MILESTONE GRID ───────────────────────────────────────── -->
+<div class="milestones">
 
-  <div class="albums-grid">
-
-    <!-- ── THE PROPOSAL ──────────────────────────────────────── -->
-    <a href="proposal.html" class="album-card reveal">
-      <img class="album-card-img" src="proposal%20photos/the%20moment/JoshandNicole-209.jpg" alt="The Proposal" />
-      <div class="album-card-overlay"></div>
-      <div class="album-card-arrow">→</div>
-      <div class="album-card-body">
-        <span class="album-card-tag">Chapter One &nbsp;·&nbsp; July 9th, 2022</span>
-        <div class="album-card-title">The Proposal</div>
-        <div class="album-card-sub">Santorini, Greece &nbsp;·&nbsp; Canaves Oia Epitome</div>
-        <div class="album-card-meta">
-          <span>The Story</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- ── PROPOSAL ALBUM ─────────────────────────────────────── -->
-    <a href="gallery-proposal.html" class="album-card reveal" style="transition-delay:.1s">
-      <img class="album-card-img" src="proposal%20photos/Pyrgos%20photo%20shoot/JoshandNicole-145.jpg" alt="Proposal Album" />
-      <div class="album-card-overlay"></div>
-      <div class="album-card-arrow">→</div>
-      <div class="album-card-body">
-        <span class="album-card-tag">Full Album &nbsp;·&nbsp; 238 Photos</span>
-        <div class="album-card-title">Proposal Photos</div>
-        <div class="album-card-sub">Every frame from the day</div>
-        <div class="album-card-meta">
-          <span>Morning</span>
-          <span>Photo Shoots</span>
-          <span>The Moment</span>
-        </div>
-      </div>
-    </a>
-
-    <!-- ── THE WEDDING (locked) ───────────────────────────────── -->
-    <div class="album-card locked reveal" style="transition-delay:.2s">
-      <img class="album-card-img loaded" src="proposal%20photos/the%20moment/JoshandNicole-220.jpg" alt="The Wedding" />
-      <div class="album-card-overlay"></div>
-      <div class="lock-badge">Coming Soon</div>
-      <div class="album-card-body">
-        <span class="album-card-tag">Chapter Two &nbsp;·&nbsp; 2023</span>
-        <div class="album-card-title">The Wedding</div>
-        <div class="album-card-sub">The day it all came together</div>
-        <div class="album-card-meta">
-          <span>In Progress</span>
-        </div>
+  <!-- ── THE PROPOSAL ──────────────────────────────────────────── -->
+  <div class="milestone reveal">
+    <div class="milestone-bg" style="background-image:url('proposal%20photos/the%20moment/JoshandNicole-209.jpg')"></div>
+    <div class="milestone-info">
+      <p class="milestone-label">Chapter One</p>
+      <span class="milestone-date">July 9th, 2022</span>
+      <h2 class="milestone-title">The Proposal</h2>
+      <span class="milestone-location">Santorini, Greece &nbsp;·&nbsp; Canaves Oia Epitome</span>
+      <div class="milestone-ctas">
+        <a href="proposal.html" class="cta-link primary">The Story</a>
+        <div class="cta-divider"></div>
+        <a href="gallery-proposal.html" class="cta-link">The Photos</a>
       </div>
     </div>
-
-    <!-- ── BABY (locked) ─────────────────────────────────────── -->
-    <div class="album-card locked reveal" style="transition-delay:.3s">
-      <img class="album-card-img loaded" src="proposal%20photos/The%20Breakfest/JoshandNicole-4.jpg" alt="Baby" />
-      <div class="album-card-overlay"></div>
-      <div class="lock-badge">Coming Soon</div>
-      <div class="album-card-body">
-        <span class="album-card-tag">Chapter Three</span>
-        <div class="album-card-title">Baby</div>
-        <div class="album-card-sub">The next chapter begins</div>
-        <div class="album-card-meta">
-          <span>In Progress</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── PLACEHOLDER 5 ──────────────────────────────────────── -->
-    <div class="album-card locked reveal" style="transition-delay:.4s; background:#0d0d0d; border:1px dashed rgba(201,169,110,.12);">
-      <div class="album-card-overlay" style="background:none;"></div>
-      <div class="album-card-body">
-        <span class="album-card-tag">Chapter Four</span>
-        <div class="album-card-title" style="color:rgba(255,255,255,.2);">More to Come</div>
-        <div class="album-card-sub" style="color:rgba(255,255,255,.15);">Every milestone, preserved</div>
-      </div>
-    </div>
-
-    <!-- ── PLACEHOLDER 6 ──────────────────────────────────────── -->
-    <div class="album-card locked reveal" style="transition-delay:.5s; background:#0d0d0d; border:1px dashed rgba(201,169,110,.08);">
-      <div class="album-card-overlay" style="background:none;"></div>
-      <div class="album-card-body">
-        <span class="album-card-tag">Chapter Five</span>
-        <div class="album-card-title" style="color:rgba(255,255,255,.12);">More to Come</div>
-        <div class="album-card-sub" style="color:rgba(255,255,255,.1);">Every milestone, preserved</div>
-      </div>
-    </div>
-
   </div>
+
+  <!-- ── THE WEDDING (coming soon) ─────────────────────────────── -->
+  <div class="milestone locked reveal" style="transition-delay:.12s">
+    <div class="milestone-bg" style="background-image:url('Home_wedding.jpg')"></div>
+    <div class="lock-tag">Coming Soon</div>
+    <div class="milestone-info">
+      <p class="milestone-label">Chapter Two</p>
+      <span class="milestone-date">2023</span>
+      <h2 class="milestone-title">The Wedding</h2>
+      <span class="milestone-location">The day it all came together</span>
+      <div class="milestone-ctas">
+        <span class="locked-cta">In Progress</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BABY (coming soon) ─────────────────────────────────────── -->
+  <div class="milestone locked reveal" style="transition-delay:.24s">
+    <div class="milestone-bg" style="background-image:url('Home_Baby.jpeg')"></div>
+    <div class="lock-tag">Coming Soon</div>
+    <div class="milestone-info">
+      <p class="milestone-label">Chapter Three</p>
+      <span class="milestone-date">TBD</span>
+      <h2 class="milestone-title">Baby</h2>
+      <span class="milestone-location">The next chapter begins</span>
+      <div class="milestone-ctas">
+        <span class="locked-cta">In Progress</span>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <!-- ─── FOOTER ───────────────────────────────────────────────── -->
 <footer>
   <span class="footer-name">Casa De Sample</span>
   <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
     <li><a href="gallery.html">All Albums</a></li>
     <li><a href="proposal.html">The Proposal</a></li>
     <li><a href="gallery-proposal.html">Proposal Photos</a></li>
@@ -379,16 +345,27 @@
     document.getElementById('mobileMenu').classList.remove('open');
   });
 
-  // ─── LAZY IMAGE LOAD ────────────────────────────────────────
-  document.querySelectorAll('.album-card-img').forEach(img => {
-    if (img.complete) { img.classList.add('loaded'); return; }
-    img.addEventListener('load', () => img.classList.add('loaded'));
+  // ─── 3D TILT on active milestone cards ──────────────────────
+  document.querySelectorAll('.milestone:not(.locked)').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left)  / rect.width  - 0.5;
+      const y = (e.clientY - rect.top)   / rect.height - 0.5;
+      card.style.transition = 'transform .1s ease';
+      card.style.transform = `perspective(900px) rotateX(${-y * 8}deg) rotateY(${x * 8}deg) scale(1.02)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transition = 'transform .7s cubic-bezier(.25,.46,.45,.94)';
+      card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)';
+    });
   });
 
   // ─── SCROLL REVEAL ──────────────────────────────────────────
   const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-  }, { threshold: 0.08 });
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.06 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 </script>
