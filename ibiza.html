@@ -7,7 +7,27 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.7.8/plyr.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.7.8/plyr.min.js" defer></script>
 <style>
+  /* Plyr global theme — gold */
+  :root {
+    --plyr-color-main: #c8a05a;
+    --plyr-range-fill-background: #c8a05a;
+    --plyr-video-background: #0d0b0a;
+    --plyr-control-spacing: 10px;
+    --plyr-font-family: 'Inter', sans-serif;
+    --plyr-font-size-base: 13px;
+    --plyr-border-radius: 0px;
+    --plyr-video-controls-background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));
+  }
+  /* Plyr fills masonry cells cleanly */
+  .media-item.video-cell .plyr,
+  .media-item.video-cell .plyr video { width: 100%; border-radius: 3px; }
+
+  /* Polaroid Plyr — no extra radius */
+  .polaroid-frame .plyr,
+  .polaroid-frame .plyr video { width: 100%; border-radius: 0; }
   :root {
     --cream: #fef9f0;
     --warm-white: #fdf6e8;
@@ -41,32 +61,70 @@
   nav a:hover { color: var(--terracotta); }
   .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 300; letter-spacing: 0.08em; }
 
-  /* HERO */
+  /* HERO — 4-panel cinematic (matches homepage) */
   .hero {
-    height: 100vh; position: relative; overflow: hidden;
-    display: flex; align-items: center; justify-content: center;
+    position: relative; width: 100vw; height: 100vh;
+    min-height: 500px; display: flex; overflow: hidden;
   }
-  .hero-img {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover; object-position: center;
-    filter: brightness(0.72);
+  .panels { display: flex; width: 100%; height: 100%; gap: 2px; background: #0a0a0a; }
+  .panel {
+    flex: 0 0 0%; opacity: 0; position: relative;
+    overflow: hidden; background: #0a0a0a;
+    transition: flex 0s, opacity 0s;
   }
-  .hero-content { position: relative; z-index: 2; text-align: center; color: #fff; padding: 2rem; }
-  .hero-eyebrow { font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 1rem; }
+  .panel.open {
+    flex: 1; opacity: 1;
+    transition: flex 1.1s cubic-bezier(.77,0,.18,1), opacity .7s ease;
+  }
+  #hp1.open { transition-delay: 0s; }
+  #hp2.open { transition-delay: 0.12s; }
+  #hp3.open { transition-delay: 0.24s; }
+  #hp4.open { transition-delay: 0.36s; }
+  .panel video {
+    position: absolute; top: 50%; left: 50%;
+    min-width: 100%; min-height: 100%;
+    width: auto; height: auto;
+    transform: translate(-50%,-50%);
+    object-fit: cover;
+    transition: transform 1.4s cubic-bezier(.25,.46,.45,.94);
+  }
+  .panel::after { content: ''; position: absolute; inset: 0; transition: background .6s ease; z-index: 1; }
+  #hp1::after { background: rgba(8,10,14,0.25); }
+  #hp2::after { background: rgba(6,8,10,0.2); }
+  #hp3::after { background: rgba(6,8,10,0.2); }
+  #hp4::after { background: rgba(8,10,14,0.25); }
+  .panel:hover::after { background: rgba(4,6,8,0.08) !important; }
+  .panel:hover video  { transform: translate(-50%,-50%) scale(1.05); }
+  .hero-overlay {
+    position: absolute; inset: 0; z-index: 2; pointer-events: none;
+    background:
+      radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,.38) 100%),
+      linear-gradient(to bottom, rgba(0,0,0,.12) 0%, transparent 40%, rgba(0,0,0,.5) 100%);
+  }
+  .hero-text {
+    position: absolute; z-index: 3;
+    left: 50%; top: 50%; transform: translate(-50%,-50%);
+    text-align: center; pointer-events: none;
+    opacity: 0; transition: opacity .8s ease;
+    color: #fff;
+  }
+  .hero-text.open { opacity: 1; }
+  .hero-eyebrow { font-size: 0.7rem; letter-spacing: 0.32em; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 0.75rem; }
   .hero-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(4.5rem, 14vw, 10rem);
-    font-weight: 300; line-height: 0.9; letter-spacing: 0.04em;
-    text-shadow: 0 2px 40px rgba(0,0,0,0.4);
+    font-size: clamp(5rem, 16vw, 12rem);
+    font-weight: 300; line-height: 0.88; letter-spacing: 0.06em;
+    text-shadow: 0 4px 60px rgba(0,0,0,0.5);
   }
-  .hero-sub { margin-top: 1.25rem; font-size: 0.85rem; letter-spacing: 0.2em; color: rgba(255,255,255,0.8); text-transform: uppercase; }
+  .hero-sub { margin-top: 1.25rem; font-size: 0.8rem; letter-spacing: 0.22em; color: rgba(255,255,255,0.72); text-transform: uppercase; }
   .hero-scroll {
-    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 4;
     color: rgba(255,255,255,0.55); font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
     display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    animation: pulse 3s ease-in-out infinite;
   }
-  .hero-scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(255,255,255,0.55), transparent); }
+  .hero-scroll-line { width: 1px; height: 36px; background: linear-gradient(to bottom, rgba(255,255,255,0.55), transparent); }
+  @keyframes pulse { 0%,100% { opacity:.45; } 50% { opacity:.9; } }
 
   /* SECTION SHARED */
   .section-inner { max-width: 1200px; margin: 0 auto; padding: 5rem 2rem; }
@@ -95,36 +153,27 @@
   /* NOBU: warm white bg */
   #nobu { background: var(--warm-white); }
 
-  /* MONOPOLY DEAL */
-  .monopoly-wrap { margin: 3rem auto; max-width: 580px; }
-  .monopoly-box {
-    border: 4px solid #2d0a0a; border-radius: 6px; overflow: hidden;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.28), inset 0 0 0 2px rgba(255,215,0,0.15);
+  /* POLAROID (Monopoly Deal video) */
+  .polaroid-wrap {
+    max-width: 460px; margin: 3rem auto;
+    transform: rotate(-1.6deg);
+    transition: transform 0.4s cubic-bezier(.25,.46,.45,.94);
   }
-  .monopoly-header {
-    background: #b50000; padding: 1rem 1.5rem 0.75rem;
-    text-align: center; border-bottom: 3px solid #2d0a0a; position: relative;
+  .polaroid-wrap:hover { transform: rotate(0deg); }
+  .polaroid-frame {
+    background: #fff;
+    padding: 10px 10px 0 10px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.14), 0 2px 8px rgba(0,0,0,0.08);
   }
-  .monopoly-header::before, .monopoly-header::after {
-    content: '🎩'; position: absolute; top: 50%; transform: translateY(-50%); font-size: 1.5rem;
-  }
-  .monopoly-header::before { left: 1rem; }
-  .monopoly-header::after { right: 1rem; }
-  .monopoly-deal-logo {
-    font-family: 'Georgia', 'Times New Roman', serif;
-    font-size: 1.8rem; font-weight: bold; color: #ffd700;
-    letter-spacing: 0.05em; text-shadow: 2px 2px 0 #2d0a0a; line-height: 1;
-  }
-  .monopoly-deal-sub {
-    color: rgba(255,215,0,0.78); font-size: 0.65rem; letter-spacing: 0.28em;
-    text-transform: uppercase; margin-top: 0.25rem; font-family: 'Inter', sans-serif;
-  }
-  .monopoly-body { background: #1a0505; }
-  .monopoly-body video { width: 100%; display: block; }
-  .monopoly-footer {
-    background: #b50000; padding: 0.6rem 1rem; text-align: center;
-    font-family: 'Georgia', serif; font-size: 0.7rem; color: #ffd700;
-    letter-spacing: 0.15em; text-transform: uppercase; border-top: 3px solid #2d0a0a;
+  .polaroid-caption {
+    background: #fff;
+    text-align: center;
+    padding: 14px 16px 22px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: #999;
+    letter-spacing: 0.03em;
   }
 
   /* SHM DARK WARM */
@@ -198,14 +247,43 @@
   <a href="gallery.html">← Back to Travels</a>
 </nav>
 
-<!-- HERO -->
+<!-- HERO — 4-panel cinematic -->
 <section class="hero">
-  <img src="IBIZA/Boat/IMG_0373.jpeg" alt="Crystal waters of Formentera" class="hero-img">
-  <div class="hero-content">
+  <div class="panels">
+    <!-- Panel 1: Nikki Beach -->
+    <div class="panel" id="hp1">
+      <video autoplay muted loop playsinline preload="auto" id="hv1">
+        <source src="IBIZA/Niki%20Beach/video_1_ca375dfe8de342a09a69bdd922f04209.mp4" type="video/mp4">
+      </video>
+    </div>
+    <!-- Panel 2: Swedish House Mafia -->
+    <div class="panel" id="hp2">
+      <video autoplay muted loop playsinline preload="auto" id="hv2">
+        <source src="IBIZA/Swedish%20House%20Maffia/video_1_877dfaf4702541739663a5af839309f7.mp4" type="video/mp4">
+      </video>
+    </div>
+    <!-- Panel 3: Boat / Formentera -->
+    <div class="panel" id="hp3">
+      <video autoplay muted loop playsinline preload="auto" id="hv3">
+        <source src="IBIZA/Boat/video_1_9667536350c34aa1a18cc055eea656cb.mp4" type="video/mp4">
+      </video>
+    </div>
+    <!-- Panel 4: Amnesia -->
+    <div class="panel" id="hp4">
+      <video autoplay muted loop playsinline preload="auto" id="hv4">
+        <source src="IBIZA/Amnesia%20Ibiza/video_1_1d8de1fec06f41b2930040a59add6c9f.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+
+  <div class="hero-overlay"></div>
+
+  <div class="hero-text" id="heroText">
     <p class="hero-eyebrow">Summer 2022</p>
     <h1 class="hero-title">Ibiza</h1>
     <p class="hero-sub">The White Isle &nbsp;·&nbsp; July 2022</p>
   </div>
+
   <div class="hero-scroll">
     <div class="hero-scroll-line"></div>
     <span>Scroll</span>
@@ -245,20 +323,15 @@
     </p>
     <div class="masonry" id="nobu-grid"></div>
 
-    <!-- MONOPOLY DEAL -->
-    <div class="monopoly-wrap reveal">
-      <div class="monopoly-box">
-        <div class="monopoly-header">
-          <div class="monopoly-deal-logo">Monopoly Deal</div>
-          <div class="monopoly-deal-sub">Danielle's Favorite Game &nbsp;·&nbsp; Nobu Hotel, Ibiza</div>
-        </div>
-        <div class="monopoly-body">
-          <video controls playsinline muted preload="none">
-            <source src="IBIZA/Nobu/MonolopyDeal.mov" type="video/quicktime">
-          </video>
-        </div>
-        <div class="monopoly-footer">Do Not Pass Go &nbsp;·&nbsp; Do Not Collect £200</div>
+    <!-- MONOPOLY DEAL — polaroid frame -->
+    <div class="polaroid-wrap reveal">
+      <div class="polaroid-frame">
+        <video id="monopoly-vid" playsinline preload="metadata">
+          <source src="IBIZA/Nobu/MonolopyDeal.mp4" type="video/mp4">
+          <source src="IBIZA/Nobu/MonolopyDeal.mov" type="video/quicktime">
+        </video>
       </div>
+      <p class="polaroid-caption">monopoly deal at nobu &nbsp;·&nbsp; danielle's favorite game &nbsp;·&nbsp; she won</p>
     </div>
   </div>
 </section>
@@ -365,6 +438,18 @@
 </div>
 
 <script>
+// CINEMATIC PANEL OPEN (matches homepage)
+const heroPanels = document.querySelectorAll('.panel');
+const heroTextEl = document.getElementById('heroText');
+setTimeout(() => {
+  heroPanels.forEach(p => p.classList.add('open'));
+  setTimeout(() => heroTextEl.classList.add('open'), 1400);
+}, 120);
+['hv1','hv2','hv3','hv4'].forEach(id => {
+  const v = document.getElementById(id);
+  if (v) { v.loop = true; v.play().catch(() => {}); }
+});
+
 const B = {
   around:  'IBIZA/other/',
   nobu:    'IBIZA/Nobu/',
@@ -531,10 +616,9 @@ function buildGrid(gridId, key) {
     const item = document.createElement('div');
     item.className = 'media-item video-cell';
     const vid = document.createElement('video');
-    vid.controls = true;
     vid.playsInline = true;
     vid.muted = true;
-    vid.preload = 'none';
+    vid.preload = 'metadata';
     const src = document.createElement('source');
     src.src = base + fn;
     src.type = fn.toLowerCase().endsWith('.mp4') ? 'video/mp4' : 'video/quicktime';
@@ -551,6 +635,34 @@ buildGrid('niki-grid',    'niki');
 buildGrid('shm-grid',     'shm');
 buildGrid('amnesia-grid', 'amnesia');
 buildGrid('boat-grid',    'boat');
+
+// Init Plyr on all masonry videos + the Monopoly video
+function initPlyr() {
+  if (typeof Plyr === 'undefined') { setTimeout(initPlyr, 200); return; }
+
+  // Masonry grid videos
+  document.querySelectorAll('.media-item.video-cell video').forEach(v => {
+    new Plyr(v, {
+      controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'fullscreen'],
+      muted: true,
+      resetOnEnd: true,
+      hideControls: false,
+      clickToPlay: true,
+      disableContextMenu: false
+    });
+  });
+
+  // Monopoly Deal video (separate instance — gets its own gold theme via CSS var)
+  const monopolyVid = document.getElementById('monopoly-vid');
+  if (monopolyVid) {
+    new Plyr(monopolyVid, {
+      controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
+      hideControls: false,
+      clickToPlay: true
+    });
+  }
+}
+initPlyr();
 
 // LIGHTBOX
 let lbIdx = 0;
