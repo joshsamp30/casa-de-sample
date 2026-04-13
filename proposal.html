@@ -58,7 +58,8 @@
     }
     .editorial-video {
       position: absolute; inset: 0; width: 100%; height: 100%;
-      object-fit: cover; opacity: 0; transition: opacity 1.4s ease;
+      object-fit: cover; object-position: center 30%;
+      opacity: 0; transition: opacity 1.4s ease;
     }
     .editorial-hero.loaded .editorial-video { opacity: 1; }
     .editorial-overlay {
@@ -741,8 +742,14 @@
   ══════════════════════════════════════════════════════════ -->
   <section class="editorial-hero" id="editorialHero">
     <video class="editorial-video" id="heroVideo" autoplay muted loop playsinline preload="auto">
-      <source src="videos/panel2_proposal.mp4" type="video/mp4" />
+      <source id="heroSource" src="" type="video/mp4" />
     </video>
+    <script>
+      // Pick video before browser fetches — portrait for mobile, landscape drone for desktop
+      document.getElementById('heroSource').src =
+        window.innerWidth >= 760 ? 'videos/drone_proposal.mp4' : 'videos/panel2_proposal.mp4';
+      document.getElementById('heroVideo').load();
+    </script>
     <div class="editorial-overlay"></div>
     <div class="editorial-content">
       <p class="editorial-eyebrow">Santorini, Greece &nbsp;·&nbsp; Oia</p>
