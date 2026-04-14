@@ -603,6 +603,17 @@
       Nobody wanted to come back.
     </p>
     <div class="masonry" id="boat-grid"></div>
+
+    <!-- LITTLE BOAT POLAROID -->
+    <div class="polaroid-wrap reveal" style="transform:rotate(0.8deg); max-width:520px;">
+      <div class="polaroid-frame">
+        <video id="littleboat-vid" playsinline preload="metadata">
+          <source src="IBIZA/Boat/littleboat.mp4" type="video/mp4">
+        </video>
+      </div>
+      <p class="polaroid-caption">nick &amp; dustin's little boat &nbsp;·&nbsp; 1.5 boats &nbsp;·&nbsp; this counts</p>
+    </div>
+
   </div>
 </section>
 
@@ -787,7 +798,6 @@ const sections = {
       // — named / priority —
       'boatbeach.mp4',
       'walk.mp4',
-      'littleboat.mp4',
       'Panther.mp4',
       // — rest of the album —
       'video_1_9667536350c34aa1a18cc055eea656cb.mp4',
@@ -864,6 +874,16 @@ function initPlyr() {
       disableContextMenu: false
     });
   });
+
+  // Little boat video
+  const littleboatVid = document.getElementById('littleboat-vid');
+  if (littleboatVid) {
+    new Plyr(littleboatVid, {
+      controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
+      hideControls: false,
+      clickToPlay: true
+    });
+  }
 
   // Monopoly Deal video (separate instance — gets its own gold theme via CSS var)
   const monopolyVid = document.getElementById('monopoly-vid');
